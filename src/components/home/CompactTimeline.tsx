@@ -32,14 +32,14 @@ const timelineData = [
     },
     extraContent: {
       logo: '/images/logos/lego-league.png',
-      title: 'First Lego League',
-      subtitle: 'Robotics Competition Volunteer'
+      title: 'Robotics Competition ',
+      subtitle: 'Volunteer'
     }
   },
   {
     year: '2022',
     role: 'Lead Software Engineer',
-    description: 'Innovation Lead',
+    description: 'Innovation - Mobile Application',
     company: 'Samsung R&D',
     logo: '/images/logos/samsung.png',
   }
@@ -55,7 +55,7 @@ export default function CompactTimeline() {
         {/* Curved path */}
         <svg className="absolute w-full h-full" style={{ zIndex: 0 }}>
           <path
-            d="M 100 100 Q 300 50, 500 150 T 900 100"
+            d="M 50 120 Q 250 50, 400 150 T 800 100"
             fill="none"
             stroke={theme === 'dark' ? '#374151' : '#E5E7EB'}
             strokeWidth="2"
@@ -80,10 +80,55 @@ export default function CompactTimeline() {
 
 const TimelineItemDesktop = ({ item, index }) => {
   const positions = [
-    { x: '10%', y: '20%' },
-    { x: '45%', y: '40%' },
-    { x: '85%', y: '0%' }
+    { x: '0%', y: '18%' },    // First item - more to the left
+    { x: '30%', y: '25%' },   // Second item - more up and left
+    { x: '62%', y: '0%' }    // Third item
   ];
+
+  // Special case for the third item - reversed content
+  if (index === 2) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: index * 0.2 }}
+        className="absolute"
+        style={{
+          left: positions[index].x,
+          top: positions[index].y,
+          transform: 'translate(-50%, -50%)'
+        }}
+      >
+        <div className="text-center flex flex-col items-center">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-2 
+                     bg-white dark:bg-white rounded-full 
+                     shadow-lg dark:shadow-gray-700 p-3"
+          >
+            <Image
+              src={item.logo}
+              alt={item.role}
+              fill
+              className="object-contain p-2"
+            />
+          </motion.div>
+          <div className="text-sm md:text-base font-medium text-gray-900 dark:text-white">
+            {item.role}
+          </div>
+          <div className="text-xs md:text-sm text-gray-600 dark:text-gray-300">
+            {item.company}
+          </div>
+          <div className="text-xs text-gray-500 dark:text-gray-400">
+            {item.description}
+          </div>
+          <div className="text-sm font-medium text-blue-600 dark:text-blue-400 mt-2">
+            {item.year}
+          </div>
+        </div>
+      </motion.div>
+    );
+  }
 
   return (
     <motion.div
@@ -102,6 +147,7 @@ const TimelineItemDesktop = ({ item, index }) => {
   );
 };
 
+// Mobile Timeline Item Component (unchanged)
 const TimelineItemMobile = ({ item, index }) => {
   return (
     <motion.div
@@ -116,6 +162,7 @@ const TimelineItemMobile = ({ item, index }) => {
   );
 };
 
+// Standard Timeline Content Component
 const TimelineContent = ({ item }) => {
   return (
     <div className="text-center">
