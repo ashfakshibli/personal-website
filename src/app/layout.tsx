@@ -24,7 +24,7 @@ export default function RootLayout({
         <Providers>
           <div className="min-h-screen bg-white dark:bg-gray-900 transition-all duration-300">
             <Header />
-            <main className="flex-grow">
+            <main className="flex-grow pt-16">
               {children}
             </main>
             <Footer />

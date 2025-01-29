@@ -4,17 +4,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { SiGooglescholar } from 'react-icons/si';
 import CompactTimeline from './CompactTimeline';
 import { useTheme } from 'next-themes';
 
 export default function HeroSection() {
-  const [isMounted, setIsMounted] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const { theme } = useTheme();
 
   useEffect(() => {
-    setIsMounted(true);
+    setMounted(true);
   }, []);
 
   return (
@@ -84,37 +82,6 @@ export default function HeroSection() {
               </motion.span>
             ))}
           </div>
-
-          {/* Social Links */}
-          {isMounted && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex justify-center space-x-4 md:space-x-6"
-            >
-              {[
-                { Icon: FaGithub, href: 'https://github.com/ashfakshibli' },
-                { Icon: FaLinkedin, href: 'https://www.linkedin.com/in/ashfak-md-shibli/' },
-                { Icon: SiGooglescholar, href: 'https://scholar.google.com/citations?user=your-id' }
-              ].map(({ Icon, href }, index) => (
-                <motion.a
-                  key={href}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-gray-900 dark:text-gray-300 
-                           dark:hover:text-white transition-colors"
-                  whileHover={{ scale: 1.1 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.5 + index * 0.1 }}
-                >
-                  <Icon className="h-6 w-6 md:h-7 md:w-7" />
-                </motion.a>
-              ))}
-            </motion.div>
-          )}
         </motion.div>
       </div>
 
