@@ -1,6 +1,7 @@
 // src/components/layout/Footer.tsx
 import Link from 'next/link';
-import { FaGithub, FaLinkedin, FaGoogle } from 'react-icons/fa';
+import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { SiGooglescholar } from 'react-icons/si';
 
 export default function Footer() {
   return (
@@ -10,7 +11,6 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
             <p className="text-gray-300">Email: shibli.emon@gmail.com</p>
-            <p className="text-gray-300">Phone: +1 551-292-2812</p>
           </div>
           
           <div>
@@ -38,7 +38,7 @@ export default function Footer() {
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white"
               >
-                <FaGoogle className="h-6 w-6" />
+                <SiGooglescholar className="h-6 w-6" />
               </a>
             </div>
           </div>
@@ -54,11 +54,6 @@ export default function Footer() {
               <li>
                 <Link href="/projects" className="text-gray-300 hover:text-white">
                   Projects
-                </Link>
-              </li>
-              <li>
-                <Link href="/contact" className="text-gray-300 hover:text-white">
-                  Contact
                 </Link>
               </li>
             </ul>
