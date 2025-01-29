@@ -1,7 +1,7 @@
 // src/components/home/HeroSection.tsx
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CompactTimeline from './CompactTimeline';
@@ -13,7 +13,7 @@ interface PDFViewerProps {
   onClose: () => void;
 }
 
-export default function HeroSection(): JSX.Element {
+export default function HeroSection(): ReactNode {
   const [mounted, setMounted] = useState<boolean>(false);
   const [showResume, setShowResume] = useState<boolean>(false);
   const { resolvedTheme } = useTheme();

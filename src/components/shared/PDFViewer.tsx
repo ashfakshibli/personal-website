@@ -1,7 +1,12 @@
 import React from 'react';
 import { X } from 'lucide-react';
 
-const PDFViewer = ({ isOpen, onClose }) => {
+interface PDFViewerProps {
+  isOpen: boolean;
+  onClose: () => void;
+}
+
+const PDFViewer: React.FC<PDFViewerProps> = ({ isOpen, onClose }) => {
   if (!isOpen) return null;
 
   return (
