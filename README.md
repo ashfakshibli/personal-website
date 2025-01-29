@@ -1,36 +1,135 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio Website
 
-## Getting Started
+![Next.js](https://img.shields.io/badge/Next.js-13-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-10.16-ff69b4)
 
-First, run the development server:
+A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features a dark mode toggle, smooth animations, and a clean, professional design.
 
+## 🌟 Features
+
+- **Responsive Design:** Fully responsive layout that works seamlessly across all devices
+- **Dark Mode:** System-aware theme switching with smooth transitions
+- **Interactive Timeline:** Visual representation of professional journey
+- **Animated UI:** Smooth animations and transitions using Framer Motion
+- **Dynamic Content:** Easily updateable projects, publications, and experience sections
+- **SEO Optimized:** Built with best practices for search engine optimization
+- **Type Safety:** Full TypeScript support for robust development
+- **Performance Optimized:** Fast page loads and optimized image delivery
+
+## 🚀 Tech Stack
+
+- **Framework:** Next.js 13+ with App Router
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS
+- **Animations:** Framer Motion
+- **Icons:** React Icons
+- **Theme:** next-themes
+- **Development:** 
+  - ESLint
+  - PostCSS
+  - Turbopack
+
+## 📦 Installation
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ashfakshibli/portfolio-website.git
+cd portfolio-website
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies:
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Run the development server:
+```bash
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## Learn More
+## 🛠️ Development
 
-To learn more about Next.js, take a look at the following resources:
+### Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+portfolio-website/
+├── src/
+│   ├── app/                 # App router pages
+│   ├── components/          # React components
+│   │   ├── home/           # Homepage components
+│   │   ├── layout/         # Layout components
+│   │   ├── projects/       # Project components
+│   │   └── publications/   # Publication components
+│   ├── types/              # TypeScript types
+│   └── hooks/              # Custom React hooks
+├── public/                  # Static assets
+└── styles/                 # Global styles
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Key Components
 
-## Deploy on Vercel
+- `HeroSection`: Main landing section with profile and timeline
+- `CompactTimeline`: Interactive professional timeline
+- `Highlights`: Technical expertise showcase
+- `ProjectCard`: Reusable project display component
+- `PublicationCard`: Academic publication component
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 📱 Features Breakdown
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Responsive Design
+- Mobile-first approach
+- Breakpoint-specific layouts
+- Optimized images with Next.js Image component
+
+### Theme Switching
+- System preference detection
+- Smooth transition animations
+- Persistent theme selection
+
+### Interactive Elements
+- Animated section transitions
+- Hover effects
+- Loading states
+
+## 🚀 Deployment
+
+1. Build the production version:
+```bash
+npm run build
+```
+
+2. Use the deployment script:
+```bash
+./create-deploy-package.sh
+```
+
+This will create a `personal-website.zip` file ready for deployment.
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## ✨ Acknowledgments
+
+- Design inspiration from modern portfolio trends
+- Tailwind CSS for utility-first styling
+- Framer Motion for smooth animations
+- Next.js team for an amazing framework
+
+## 📞 Contact
+
+Ashfak Md Shibli - shibli.emon@gmail.com
+
+Project Link: [https://github.com/ashfakshibli/portfolio-website](https://github.com/ashfakshibli/portfolio-website)
