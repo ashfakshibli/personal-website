@@ -22,59 +22,72 @@ jobs:
     - name: Build
       run: npm run build
         
-    - name: Deploy to Namecheap
-      env:
-        SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        SSH_HOST: ${{ secrets.SSH_HOST }}
-        SSH_USER: ${{ secrets.SSH_USER }}
-        SSH_PORT: ${{ secrets.SSH_PORT }}
+    - name: Prepare deployment
       run: |
-        # Setup SSH
-        mkdir -p ~/.ssh
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-        chmod 600 ~/.ssh/deploy_key
-        echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+        # Create deployment directory
+        mkdir -p deploy
         
-        # Create deployment package
-        mkdir deploy
+        # Copy necessary files
         cp -r .next deploy/
         cp -r public deploy/
         cp -r src deploy/
         cp package.json package-lock.json next.config.ts tsconfig.json deploy/
         
         # Create server.js
-        echo 'const { createServer } = require("http")
-        const { parse } = require("url")
-        const next = require("next")
-        const dev = process.env.NODE_ENV !== "production"
+        cat << 'EOF' > deploy/server.js
+        const { createServer } = require('http')
+        const { parse } = require('url')
+        const next = require('next')
+        
+        const dev = process.env.NODE_ENV !== 'production'
         const app = next({ dev })
         const handle = app.getRequestHandler()
+        
         app.prepare().then(() => {
           createServer((req, res) => {
             const parsedUrl = parse(req.url, true)
             handle(req, res, parsedUrl)
           }).listen(3000, (err) => {
             if (err) throw err
-            console.log("> Ready on http://localhost:3000")
+            console.log('> Ready on http://localhost:3000')
           })
-        })' > deploy/server.js
+        })
+        EOF
         
         # Create .htaccess
-        echo '# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+        cat << 'EOF' > deploy/.htaccess
+        # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
         PassengerAppRoot "/home/ashfrewu/personal-website"
         PassengerBaseURI "/"
         PassengerNodejs "/home/ashfrewu/nodevenv/personal-website/20/bin/node"
         PassengerAppType node
         PassengerStartupFile server.js
-        # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END' > deploy/.htaccess
+        # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+        EOF
         
-        # Deploy
+        # Create deployment package
         cd deploy
         zip -r ../deploy.zip .
         cd ..
-        scp -P $SSH_PORT -i ~/.ssh/deploy_key deploy.zip $SSH_USER@$SSH_HOST:/home/ashfrewu/personal-website/
-        ssh -p $SSH_PORT -i ~/.ssh/deploy_key $SSH_USER@$SSH_HOST "cd /home/ashfrewu/personal-website && \
-          unzip -o deploy.zip && \
-          rm deploy.zip && \
-          source /home/ashfrewu/nodevenv/personal-website/20/bin/activate && \
-          npm ci --production"
+
+    - name: Setup SSH
+      run: |
+        mkdir -p ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
+        ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+    
+    - name: Deploy to Server
+      run: |
+        # Upload deployment package
+        scp -P ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key deploy.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ashfrewu/personal-website/
+        
+        # Execute deployment commands
+        ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
+          cd /home/ashfrewu/personal-website
+          unzip -o deploy.zip
+          rm deploy.zip
+          source /home/ashfrewu/nodevenv/personal-website/20/bin/activate
+          npm ci --production --quiet
+          exit
+        ENDSSH
