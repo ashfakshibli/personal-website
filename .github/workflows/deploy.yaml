@@ -83,12 +83,18 @@ jobs:
           cd /home/ashfrewu/personal-website || exit 1
           echo "Current directory: $(pwd)"
           
-          # Remove everything including node_modules
+          # First extract the new files to a temporary directory
+          mkdir -p temp
+          cd temp
+          unzip -o ../deploy.zip
+          cd ..
+          
+          # Now remove everything from the root directory
           rm -rf *
           
-          # Extract new files
-          unzip -o deploy.zip
-          rm deploy.zip
+          # Move files from temp back to root
+          mv temp/* .
+          rm -rf temp
           
           # Set correct permissions
           chmod 755 .
