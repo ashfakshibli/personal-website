@@ -46,12 +46,12 @@ const highlights = [
 
 export default function Highlights() {
   return (
-    <div className="py-12">
+    <div className="py-12 transition-theme">
       <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="text-3xl font-bold text-center mb-12"
+        className="text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white transition-theme"
       >
         Technical Expertise
       </motion.h2>
@@ -65,13 +65,17 @@ export default function Highlights() {
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
             whileHover={{ scale: 1.05 }}
-            className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-all"
+            className="card p-6 transition-theme"
           >
             <div className="flex items-center mb-4">
-              <item.icon className="w-8 h-8 text-blue-600 mr-3" />
-              <h3 className="text-xl font-semibold">{item.title}</h3>
+              <item.icon className="w-8 h-8 text-blue-600 dark:text-blue-400 transition-theme mr-3" />
+              <h3 className="text-xl font-semibold text-gray-900 dark:text-white transition-theme">
+                {item.title}
+              </h3>
             </div>
-            <p className="text-gray-600">{item.description}</p>
+            <p className="text-gray-600 dark:text-gray-300 transition-theme">
+              {item.description}
+            </p>
           </motion.div>
         ))}
       </div>
