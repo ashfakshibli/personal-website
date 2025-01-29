@@ -24,7 +24,6 @@ jobs:
         
     - name: Prepare deployment
       run: |
-        # Create deployment directory without node_modules
         mkdir -p deploy
         
         # Copy necessary files
@@ -65,39 +64,49 @@ jobs:
         # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
         EOF
         
-        # Create deployment package
         cd deploy
         zip -r ../deploy.zip .
         cd ..
-
-    - name: Setup SSH
+        
+    - name: Setup SSH and deploy
       run: |
+        # Setup SSH
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
         chmod 600 ~/.ssh/deploy_key
         ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
-    
-    - name: Deploy to Server
-      run: |
-        # Upload deployment package
+        
+        # Upload file
+        echo "Uploading deploy.zip..."
         scp -P ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key deploy.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ashfrewu/personal-website/
         
         # Execute deployment commands
         ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
-          cd /home/ashfrewu/personal-website
+          cd /home/ashfrewu/personal-website || exit 1
+          echo "Current directory: $(pwd)"
           
-          # Remove old files but preserve node_modules symlink
-          find . -mindepth 1 ! -name 'node_modules' -exec rm -rf {} +
+          # Verify deploy.zip exists
+          if [ ! -f deploy.zip ]; then
+            echo "deploy.zip not found!"
+            exit 1
+          fi
+          
+          # Keep node_modules and remove everything else
+          find . -mindepth 1 ! -name 'node_modules' ! -name 'deploy.zip' -exec rm -rf {} +
           
           # Extract new files
           unzip -o deploy.zip
           rm deploy.zip
           
-          # Let CloudLinux handle the node_modules
+          # Set correct permissions
+          chmod 755 .
+          chmod 644 .htaccess
+          chmod -R 755 .next public src
+          
+          echo "Deployment completed. Files in directory:"
+          ls -la
+          
           exit
         ENDSSH
         
-    - name: Trigger NPM Install
-      run: |
-        # Connect to server and trigger npm install through Node.js Selector UI
-        echo "Deployment completed. Please run NPM Install from Node.js Selector in cPanel"
+        echo "Deployment completed successfully!"
