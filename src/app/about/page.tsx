@@ -1,120 +1,215 @@
 // src/app/about/page.tsx
+'use client';
+
+import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { FaGithub, FaLinkedin, FaGoogle } from 'react-icons/fa';
+import { FaGraduationCap, FaCode, FaBrain, FaLock, FaMobileAlt, FaServer } from 'react-icons/fa';
+import { SiPytorch, SiPython, SiSwift, SiDotnet, SiFirebase, SiGooglecloud } from 'react-icons/si';
+
+const educationInfo = [
+  {
+    logo: '/images/logos/tntech.png',
+    school: 'Tennessee Tech',
+    degree: 'MS in Computer Science',
+    year: '2023-2024',
+    focus: 'AI & Cybersecurity'
+  },
+  {
+    logo: '/images/logos/njit.png',
+    school: 'NJIT',
+    degree: 'MS in Computer Science',
+    year: '2022-2023',
+    focus: 'Healthcare Security'
+  }
+];
+
+const experienceInfo = [
+  {
+    logo: '/images/logos/athleteden.png',
+    company: 'Athlete Den LLC',
+    role: 'Software Engineer',
+    year: '2023-Present',
+    focus: 'AI Sports Analytics'
+  },
+  {
+    logo: '/images/logos/samsung.png',
+    company: 'Samsung R&D',
+    role: 'Lead Engineer',
+    year: '2018-2022',
+    focus: 'Mobile Development'
+  }
+];
+
+const technicalSkills = [
+  {
+    icon: SiPytorch,
+    name: 'Machine Learning',
+    items: ['PyTorch', 'Computer Vision', 'Deep Learning']
+  },
+  {
+    icon: FaLock,
+    name: 'Cybersecurity',
+    items: ['Threat Detection', 'STRIDE Modeling', 'Data Protection']
+  },
+  {
+    icon: FaMobileAlt,
+    name: 'Mobile Dev',
+    items: ['iOS (Swift)', 'React Native', 'Firebase']
+  }
+];
+
+const tools = [
+  { icon: SiPython, name: 'Python' },
+  { icon: SiSwift, name: 'Swift' },
+  { icon: SiDotnet, name: 'C#' },
+  { icon: SiFirebase, name: 'Firebase' },
+  { icon: SiGooglecloud, name: 'GCP' }
+];
 
 export default function AboutPage() {
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
-      {/* Profile Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
-        <div className="md:col-span-1">
-          <div className="aspect-square relative rounded-lg overflow-hidden">
-            <Image
-              src="/images/profile.jpg" // Add your profile image
-              alt="Ashfak Md Shibli"
-              fill
-              className="object-cover"
-            />
+    <div className="min-h-screen bg-white dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Education Section */}
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-16"
+        >
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
+            <FaGraduationCap className="mr-3 text-blue-600 dark:text-blue-400" />
+            Education
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {educationInfo.map((edu) => (
+              <motion.div
+                key={edu.school}
+                whileHover={{ scale: 1.02 }}
+                className="rounded-lg border border-gray-200 dark:border-gray-700
+                          bg-white dark:bg-gray-800 p-6 
+                          shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]
+                          dark:shadow-[0_2px_15px_-3px_rgba(255,255,255,0.07),0_10px_20px_-2px_rgba(255,255,255,0.04)]"
+              >
+                <div className="flex items-center">
+                  <div className="relative w-16 h-16 bg-white dark:bg-white rounded-full p-2">
+                    <Image
+                      src={edu.logo}
+                      alt={edu.school}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{edu.school}</h3>
+                    <p className="text-sm text-blue-600 dark:text-blue-400">{edu.degree}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{edu.year}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{edu.focus}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-          <div className="mt-6 flex justify-center space-x-4">
-            <a href="https://github.com/ashfakshibli" target="_blank" rel="noopener noreferrer" 
-               className="text-gray-600 hover:text-gray-900">
-              <FaGithub className="h-6 w-6" />
-            </a>
-            <a href="https://www.linkedin.com/in/ashfak-md-shibli/" target="_blank" rel="noopener noreferrer"
-               className="text-gray-600 hover:text-gray-900">
-              <FaLinkedin className="h-6 w-6" />
-            </a>
-            <a href="https://scholar.google.com/citations?user=your-id" target="_blank" rel="noopener noreferrer"
-               className="text-gray-600 hover:text-gray-900">
-              <FaGoogle className="h-6 w-6" />
-            </a>
+        </motion.section>
+
+        {/* Experience Section */}
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-16"
+        >
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
+            <FaCode className="mr-3 text-blue-600 dark:text-blue-400" />
+            Experience
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {experienceInfo.map((exp) => (
+              <motion.div
+                key={exp.company}
+                whileHover={{ scale: 1.02 }}
+                className="rounded-lg border border-gray-200 dark:border-gray-700
+                          bg-white dark:bg-gray-800 p-6 
+                          shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]
+                          dark:shadow-[0_2px_15px_-3px_rgba(255,255,255,0.07),0_10px_20px_-2px_rgba(255,255,255,0.04)]"
+              >
+                <div className="flex items-center">
+                  <div className="relative w-16 h-16 bg-white dark:bg-white rounded-full p-2">
+                    <Image
+                      src={exp.logo}
+                      alt={exp.company}
+                      fill
+                      className="object-contain p-2"
+                    />
+                  </div>
+                  <div className="ml-4">
+                    <h3 className="font-semibold text-gray-900 dark:text-white">{exp.company}</h3>
+                    <p className="text-sm text-blue-600 dark:text-blue-400">{exp.role}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-300">{exp.year}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{exp.focus}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
           </div>
-        </div>
-        
-        <div className="md:col-span-2">
-          <h1 className="text-4xl font-bold mb-6">About Me</h1>
-          <div className="prose max-w-none">
-            <p className="text-lg mb-4">
-              I am a Software Engineer and Computer Science Researcher specializing in artificial intelligence,
-              cybersecurity, and software engineering. With a Master's degree in Computer Science (4.0/4.0 GPA)
-              from Tennessee Tech University and New Jersey Institute of Technology, I combine academic excellence
-              with practical industry experience.
-            </p>
-            <p className="text-lg mb-4">
-              Currently, I'm leading the development of patent-pending AI technology at AthleteDen, focusing on
-              innovative solutions in sports analytics through machine learning and computer vision.
-            </p>
+        </motion.section>
+
+        {/* Technical Skills Section */}
+        <motion.section 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-16"
+        >
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
+            <FaBrain className="mr-3 text-blue-600 dark:text-blue-400" />
+            Technical Expertise
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {technicalSkills.map((skill) => (
+              <motion.div
+                key={skill.name}
+                whileHover={{ scale: 1.02 }}
+                className="rounded-lg border border-gray-200 dark:border-gray-700
+                          bg-white dark:bg-gray-800 p-6 
+                          shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]
+                          dark:shadow-[0_2px_15px_-3px_rgba(255,255,255,0.07),0_10px_20px_-2px_rgba(255,255,255,0.04)]"
+              >
+                <div className="flex items-center mb-4">
+                  <skill.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                  <h3 className="ml-3 font-semibold text-gray-900 dark:text-white">{skill.name}</h3>
+                </div>
+                <ul className="space-y-2">
+                  {skill.items.map((item) => (
+                    <li key={item} className="text-sm text-gray-600 dark:text-gray-300">{item}</li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
           </div>
-        </div>
+        </motion.section>
+
+        {/* Tools & Technologies */}
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+        >
+          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
+            <FaServer className="mr-3 text-blue-600 dark:text-blue-400" />
+            Tools & Technologies
+          </h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
+            {tools.map((tool) => (
+              <motion.div
+                key={tool.name}
+                whileHover={{ scale: 1.05 }}
+                className="flex items-center justify-center p-4 rounded-lg border border-gray-200 
+                          dark:border-gray-700 bg-white dark:bg-gray-800"
+              >
+                <tool.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
+                <span className="ml-2 text-gray-900 dark:text-white">{tool.name}</span>
+              </motion.div>
+            ))}
+          </div>
+        </motion.section>
       </div>
-
-      {/* Education Section */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-6">Education</h2>
-        <div className="space-y-6">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="font-semibold text-xl">Master of Science in Computer Science</h3>
-            <p className="text-gray-600">Tennessee Tech University & New Jersey Institute of Technology</p>
-            <p className="text-gray-600">2022-2024 | GPA: 4.00/4.00</p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="font-semibold text-xl">Bachelor of Science in Computer Science and Engineering</h3>
-            <p className="text-gray-600">Chittagong University of Engineering and Technology</p>
-            <p className="text-gray-600">2013-2017 | GPA: 3.53/4.00</p>
-          </div>
-        </div>
-      </section>
-
-      {/* Research Interests */}
-      <section className="mb-16">
-        <h2 className="text-2xl font-bold mb-6">Research Interests</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="font-semibold text-lg mb-3">Cybersecurity</h3>
-            <p className="text-gray-600">
-              SMS phishing detection, mobile security, and threat modeling for healthcare applications
-            </p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="font-semibold text-lg mb-3">Machine Learning</h3>
-            <p className="text-gray-600">
-              Computer vision, deep learning for sports analytics, and activity detection
-            </p>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="font-semibold text-lg mb-3">Software Engineering</h3>
-            <p className="text-gray-600">
-              Mobile application development, cloud architecture, and secure system design
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* Professional Experience */}
-      <section>
-        <h2 className="text-2xl font-bold mb-6">Professional Experience</h2>
-        <div className="space-y-6">
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="font-semibold text-xl">Software Engineer</h3>
-            <p className="text-gray-600">AthleteDen | 2023-Present</p>
-            <ul className="list-disc list-inside mt-3 text-gray-600">
-              <li>Leading development of patent-pending AI sports technology</li>
-              <li>Implementing computer vision solutions for athletic performance analysis</li>
-              <li>Developing mobile applications with ML integration</li>
-            </ul>
-          </div>
-          <div className="bg-white p-6 rounded-lg shadow-sm border">
-            <h3 className="font-semibold text-xl">Lead Software Engineer</h3>
-            <p className="text-gray-600">Samsung R&D Institute | 2018-2022</p>
-            <ul className="list-disc list-inside mt-3 text-gray-600">
-              <li>Led development of major applications including Family Hub and Galaxy Buds</li>
-              <li>Managed innovation initiatives and technical knowledge base</li>
-              <li>Implemented security-focused solutions and automated testing frameworks</li>
-            </ul>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
