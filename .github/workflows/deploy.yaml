@@ -16,11 +16,12 @@ jobs:
       with:
         node-version: '20'
         
-    - name: Install dependencies
-      run: npm ci
-      
-    - name: Build
-      run: npm run build
+    - name: Install dependencies and build
+      run: |
+        # Increase node memory limit
+        export NODE_OPTIONS="--max_old_space_size=4096"
+        npm ci
+        npm run build
         
     - name: Prepare deployment
       run: |
@@ -87,7 +88,9 @@ jobs:
           cd /home/ashfrewu/personal-website
           unzip -o deploy.zip
           rm deploy.zip
+          # Install production dependencies in chunks to avoid memory issues
+          export NODE_OPTIONS="--max_old_space_size=2048"
           source /home/ashfrewu/nodevenv/personal-website/20/bin/activate
-          npm ci --production --quiet
+          npm install --omit=dev --no-audit --no-fund --quiet || exit 1
           exit
         ENDSSH
