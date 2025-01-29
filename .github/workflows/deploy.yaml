@@ -25,6 +25,8 @@ jobs:
     - name: Prepare deployment
       run: |
         mkdir -p deploy
+        
+        # Copy necessary files
         cp -r .next deploy/
         cp -r public deploy/
         cp -r src deploy/
@@ -83,18 +85,18 @@ jobs:
           cd /home/ashfrewu/personal-website || exit 1
           echo "Current directory: $(pwd)"
           
-          # First extract the new files to a temporary directory
-          mkdir -p temp
-          cd temp
-          unzip -o ../deploy.zip
-          cd ..
+          # Verify deploy.zip exists
+          if [ ! -f deploy.zip ]; then
+            echo "deploy.zip not found!"
+            exit 1
+          fi
           
-          # Now remove everything from the root directory
-          rm -rf *
+          # Keep node_modules and remove everything else
+          find . -mindepth 1 ! -name 'node_modules' ! -name 'deploy.zip' -exec rm -rf {} +
           
-          # Move files from temp back to root
-          mv temp/* .
-          rm -rf temp
+          # Extract new files
+          unzip -o deploy.zip
+          rm deploy.zip
           
           # Set correct permissions
           chmod 755 .
