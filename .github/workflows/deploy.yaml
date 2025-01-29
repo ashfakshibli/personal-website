@@ -18,14 +18,13 @@ jobs:
         
     - name: Install dependencies and build
       run: |
-        # Increase node memory limit
         export NODE_OPTIONS="--max_old_space_size=4096"
         npm ci
         npm run build
         
     - name: Prepare deployment
       run: |
-        # Create deployment directory
+        # Create deployment directory without node_modules
         mkdir -p deploy
         
         # Copy necessary files
@@ -86,11 +85,19 @@ jobs:
         # Execute deployment commands
         ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
           cd /home/ashfrewu/personal-website
+          
+          # Remove old files but preserve node_modules symlink
+          find . -mindepth 1 ! -name 'node_modules' -exec rm -rf {} +
+          
+          # Extract new files
           unzip -o deploy.zip
           rm deploy.zip
-          # Install production dependencies in chunks to avoid memory issues
-          export NODE_OPTIONS="--max_old_space_size=2048"
-          source /home/ashfrewu/nodevenv/personal-website/20/bin/activate
-          npm install --omit=dev --no-audit --no-fund --quiet || exit 1
+          
+          # Let CloudLinux handle the node_modules
           exit
         ENDSSH
+        
+    - name: Trigger NPM Install
+      run: |
+        # Connect to server and trigger npm install through Node.js Selector UI
+        echo "Deployment completed. Please run NPM Install from Node.js Selector in cPanel"
