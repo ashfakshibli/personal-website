@@ -9,11 +9,23 @@ import { useTheme } from 'next-themes';
 
 export default function HeroSection() {
   const [mounted, setMounted] = useState(false);
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  if (!mounted) {
+    return null; // Prevent hydration mismatch by not rendering until mounted
+  }
+
+  const gradientStyle = {
+    background: `radial-gradient(
+      circle at center,
+      transparent 60%,
+      ${resolvedTheme === 'dark' ? '#111827' : 'white'} 100%
+    )`
+  };
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
@@ -37,15 +49,7 @@ export default function HeroSection() {
             {/* Vignette overlay */}
             <div 
               className="absolute inset-0 rounded-lg" 
-              style={{ 
-                background: `
-                  radial-gradient(
-                    circle at center,
-                    transparent 60%,
-                    ${theme === 'dark' ? '#111827' : 'white'} 100%
-                  )
-                `
-              }}
+              style={gradientStyle}
             />
           </div>
         </motion.div>
@@ -58,7 +62,7 @@ export default function HeroSection() {
           className="text-center mt-6 md:mt-8 w-full"
         >
           <h1 className="text-3xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
-          Researcher & Software Engineer
+            Researcher & Software Engineer
           </h1>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6">
             Computer Science Grad

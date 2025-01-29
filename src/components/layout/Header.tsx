@@ -42,7 +42,7 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
   const [mounted, setMounted] = useState(false);
-  const { setTheme, theme, resolvedTheme } = useTheme();
+  const { setTheme, resolvedTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {

@@ -3,7 +3,6 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { FaGithub } from 'react-icons/fa';
 import { SiPython, SiSwift, SiFirebase, SiGooglecloud } from 'react-icons/si';
 
 const projects = [

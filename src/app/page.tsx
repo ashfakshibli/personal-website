@@ -1,5 +1,4 @@
 // src/app/page.tsx
-import CompactTimeline from '@/components/home/CompactTimeline';
 import HeroSection from '@/components/home/HeroSection';
 import Highlights from '@/components/home/Highlights';
 

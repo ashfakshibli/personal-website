@@ -5,8 +5,9 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
 import { useTheme } from 'next-themes';
+import type { TimelineItem, TimelineItemProps } from '@/types/timeline';
 
-const timelineData = [
+const timelineData: TimelineItem[] = [
   {
     year: '2024',
     role: 'Software Engineer',
@@ -46,29 +47,26 @@ const timelineData = [
 ];
 
 export default function CompactTimeline() {
-  const { theme } = useTheme();
+  const { resolvedTheme } = useTheme();
+  const strokeColor = resolvedTheme === 'dark' ? '#374151' : '#E5E7EB';
 
   return (
     <div className="relative w-full">
-      {/* Desktop Timeline */}
       <div className="hidden lg:block relative h-[500px]">
-        {/* Curved path */}
         <svg className="absolute w-full h-full" style={{ zIndex: 0 }}>
           <path
             d="M 50 120 Q 250 50, 400 150 T 800 100"
             fill="none"
-            stroke={theme === 'dark' ? '#374151' : '#E5E7EB'}
+            stroke={strokeColor}
             strokeWidth="2"
           />
         </svg>
 
-        {/* Timeline Items for Desktop */}
         {timelineData.map((item, index) => (
           <TimelineItemDesktop key={index} item={item} index={index} />
         ))}
       </div>
 
-      {/* Mobile Timeline */}
       <div className="lg:hidden space-y-8 py-4">
         {timelineData.map((item, index) => (
           <TimelineItemMobile key={index} item={item} index={index} />
@@ -78,11 +76,12 @@ export default function CompactTimeline() {
   );
 }
 
-const TimelineItemDesktop = ({ item, index }) => {
+const TimelineItemDesktop: React.FC<TimelineItemProps> = ({ item, index }) => {
+  const defaultImagePath = '/api/placeholder/400/400';
   const positions = [
-    { x: '0%', y: '18%' },    // First item - more to the left
-    { x: '30%', y: '25%' },   // Second item - more up and left
-    { x: '62%', y: '0%' }    // Third item
+    { x: '0%', y: '18%' },
+    { x: '30%', y: '25%' },
+    { x: '62%', y: '0%' }
   ];
 
   // Special case for the third item - reversed content
@@ -107,8 +106,8 @@ const TimelineItemDesktop = ({ item, index }) => {
                      shadow-lg dark:shadow-gray-700 p-3"
           >
             <Image
-              src={item.logo}
-              alt={item.role}
+              src={item.logo || defaultImagePath}
+              alt={item.role || 'Company logo'}
               fill
               className="object-contain p-2"
             />
@@ -147,8 +146,7 @@ const TimelineItemDesktop = ({ item, index }) => {
   );
 };
 
-// Mobile Timeline Item Component (unchanged)
-const TimelineItemMobile = ({ item, index }) => {
+const TimelineItemMobile: React.FC<TimelineItemProps> = ({ item, index }) => {
   return (
     <motion.div
       initial={{ opacity: 0, x: -20 }}
@@ -162,17 +160,16 @@ const TimelineItemMobile = ({ item, index }) => {
   );
 };
 
-// Standard Timeline Content Component
-const TimelineContent = ({ item }) => {
+const TimelineContent: React.FC<{ item: TimelineItem }> = ({ item }) => {
+  const defaultImagePath = '/api/placeholder/400/400';
+
   return (
     <div className="text-center">
-      {/* Year */}
       <div className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-2">
         {item.year}
       </div>
 
-      {'mainContent' in item ? (
-        // Education/Dual Institution Content
+      {'mainContent' in item && item.mainContent ? (
         <div>
           <div className="flex justify-center space-x-4 mb-2">
             {item.mainContent.institutions.map((institution) => (
@@ -184,7 +181,7 @@ const TimelineContent = ({ item }) => {
                          shadow-lg dark:shadow-gray-700 p-3"
               >
                 <Image
-                  src={institution.logo}
+                  src={institution.logo || defaultImagePath}
                   alt={institution.name}
                   fill
                   className="object-contain p-1"
@@ -199,7 +196,6 @@ const TimelineContent = ({ item }) => {
             {item.mainContent.description}
           </div>
 
-          {/* Extra Content (e.g., Lego League) */}
           {item.extraContent && (
             <motion.div
               initial={{ opacity: 0, y: 10 }}
@@ -214,7 +210,7 @@ const TimelineContent = ({ item }) => {
                          shadow-lg dark:shadow-gray-700 p-2"
               >
                 <Image
-                  src={item.extraContent.logo}
+                  src={item.extraContent.logo || defaultImagePath}
                   alt={item.extraContent.title}
                   fill
                   className="object-contain"
@@ -230,7 +226,6 @@ const TimelineContent = ({ item }) => {
           )}
         </div>
       ) : (
-        // Standard Timeline Item
         <div>
           <motion.div
             whileHover={{ scale: 1.1 }}
@@ -239,8 +234,8 @@ const TimelineContent = ({ item }) => {
                      shadow-lg dark:shadow-gray-700 p-3"
           >
             <Image
-              src={item.logo}
-              alt={item.role}
+              src={item.logo || defaultImagePath}
+              alt={item.role || 'Timeline item'}
               fill
               className="object-contain p-2"
             />
