@@ -135,7 +135,7 @@ export default function HeroSection(): ReactNode {
               </motion.button>
 
               <motion.a
-                href="/Ashfak_Resume_2025_For Lawyers.pdf"
+                href="/Ashfak_Resume_2025.pdf"
                 download="Ashfak_Md_Shibli_Resume.pdf"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
