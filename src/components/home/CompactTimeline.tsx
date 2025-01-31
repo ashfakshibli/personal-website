@@ -55,7 +55,7 @@ export default function CompactTimeline() {
       <div className="hidden lg:block relative h-[500px]">
         <svg className="absolute w-full h-full" style={{ zIndex: 0 }}>
           <path
-            d="M 50 120 Q 250 50, 400 150 T 800 100"
+            d="M 10 120 Q 250 50, 400 150 T 800 100"
             fill="none"
             stroke={strokeColor}
             strokeWidth="2"
@@ -79,7 +79,7 @@ export default function CompactTimeline() {
 const TimelineItemDesktop: React.FC<TimelineItemProps> = ({ item, index }) => {
   const defaultImagePath = '/api/placeholder/400/400';
   const positions = [
-    { x: '0%', y: '18%' },
+    { x: '0%', y: '17%' },
     { x: '30%', y: '25%' },
     { x: '62%', y: '0%' }
   ];
