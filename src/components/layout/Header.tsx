@@ -76,7 +76,7 @@ export default function Header() {
       <div className="flex items-center space-x-2 sm:space-x-4">
       <Link 
       href="/" 
-      className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300 whitespace-nowrap"
+      className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300 whitespace-nowrap pl-8"
       >
       Ashfak Md Shibli
       </Link>
