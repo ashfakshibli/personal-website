@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CompactTimeline from './CompactTimeline';
+import TechnicalLogos from './TechnicalLogos';
 import { useTheme } from 'next-themes';
 import PDFViewer from '@/components/shared/PDFViewer';
 
@@ -78,7 +79,7 @@ export default function HeroSection() {
               ))}
             </div>
             
-            {/* Resume Button */}
+            {/* Resume Buttons */}
             <div className="flex justify-center space-x-3 mt-8">
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
@@ -146,15 +147,30 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Timeline Section */}
-        <motion.div
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.3 }}
-          className="lg:col-span-7 w-full overflow-x-hidden px-4 md:px-0"
-        >
-          <CompactTimeline />
-        </motion.div>
+        {/* Right Column: Timeline and Tech Stack */}
+        <div className="lg:col-span-7">
+          <div>
+            {/* Timeline Section */}
+            <motion.div
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.3 }}
+              className="w-full overflow-x-hidden px-4 md:px-0"
+            >
+              <CompactTimeline />
+            </motion.div>
+
+            {/* Technical Logos Section */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8 }}
+              className="w-full px-4 md:px-0 mt-20 md:-mt-16"
+            >
+              <TechnicalLogos />
+            </motion.div>
+          </div>
+        </div>
       </div>
     </div>
   );
