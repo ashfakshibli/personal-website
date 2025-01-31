@@ -1,38 +1,23 @@
 // src/components/home/HeroSection.tsx
 'use client';
 
-import React, { useState, useEffect, ReactNode } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CompactTimeline from './CompactTimeline';
 import { useTheme } from 'next-themes';
 import PDFViewer from '@/components/shared/PDFViewer';
 
-interface PDFViewerProps {
-  isOpen: boolean;
-  onClose: () => void;
-}
-
-export default function HeroSection(): ReactNode {
-  const [mounted, setMounted] = useState<boolean>(false);
-  const [showResume, setShowResume] = useState<boolean>(false);
+export default function HeroSection() {
+  const [mounted, setMounted] = useState(false);
+  const [showResume, setShowResume] = useState(false);
   const { resolvedTheme } = useTheme();
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  if (!mounted) {
-    return null;
-  }
-
-  const gradientStyle = {
-    background: `radial-gradient(
-      circle at center,
-      transparent 60%,
-      ${resolvedTheme === 'dark' ? '#111827' : 'white'} 100%
-    )`
-  };
+  if (!mounted) return null;
 
   return (
     <div>
@@ -45,20 +30,15 @@ export default function HeroSection(): ReactNode {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="relative w-full max-w-sm md:max-w-lg aspect-[4/3]"
+            className="relative mx-auto w-full max-w-[320px] mt-4 mb-8"
           >
-            <div className="relative w-full h-full">
+            <div className="relative w-56 h-56 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
               <Image
-                src="/images/profile-nyc.jpg"
-                alt="Profile with NYC skyline"
+                src="/images/ashfak-headshot.jpg"
+                alt="Ashfak Md Shibli"
                 fill
-                className="object-cover rounded-lg"
+                className="object-cover object-top"
                 priority
-              />
-              {/* Vignette overlay */}
-              <div 
-                className="absolute inset-0 rounded-lg" 
-                style={gradientStyle}
               />
             </div>
           </motion.div>
@@ -68,17 +48,17 @@ export default function HeroSection(): ReactNode {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-center mt-6 md:mt-8 w-full"
+            className="text-center w-full space-y-5"
           >
-            <h1 className="text-3xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
               Researcher & Software Engineer
             </h1>
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6">
+            <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
               Computer Science Grad
             </h2>
             
             {/* Skills Tags */}
-            <div className="flex justify-center items-center gap-2 md:gap-3 mb-6 md:mb-8">
+            <div className="flex justify-center items-center gap-2 md:gap-3 my-6">
               {['AI/ML', 'Cybersecurity', 'Mobile Dev'].map((skill, index) => (
                 <motion.span
                   key={skill}
@@ -98,8 +78,8 @@ export default function HeroSection(): ReactNode {
               ))}
             </div>
             
-            {/* Resume Buttons */}
-            <div className="flex justify-center space-x-3">
+            {/* Resume Button */}
+            <div className="flex justify-center space-x-3 mt-8">
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -135,8 +115,8 @@ export default function HeroSection(): ReactNode {
               </motion.button>
 
               <motion.a
-                href="/Ashfak_Resume_2025.pdf"
-                download="Ashfak_Md_Shibli_Resume.pdf"
+                href="/Ashfak_Resume_2025_For Lawyers.pdf"
+                download
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
