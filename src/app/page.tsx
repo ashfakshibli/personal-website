@@ -1,6 +1,7 @@
 // src/app/page.tsx
+// src/app/page.tsx
 import HeroSection from '@/components/home/HeroSection';
-import Highlights from '@/components/home/Highlights';
+import LatestNews from '@/components/home/LatestNews';
 
 export default function HomePage() {
   return (
@@ -12,10 +13,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Technical Expertise Section */}
-      <section className="bg-white dark:bg-gray-900 py-16">
+      {/* Latest News Section */}
+      <section className="bg-white dark:bg-gray-900 py-4">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <Highlights />
+          <LatestNews />
         </div>
       </section>
     </div>
