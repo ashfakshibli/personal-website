@@ -135,7 +135,12 @@ export default function LatestNews() {
 
               {/* Content */}
               <div 
-                onClick={() => item.link && window.open(item.link.url, '_blank')}
+                onClick={(e) => {
+                    e.stopPropagation(); // Prevent triggering the card click
+                    if (item.link?.url) {
+                      window.open(item.link.url, '_blank');
+                    }
+                  }}
                 className={`
                   flex-grow ml-8 p-4 rounded-lg transition-all duration-300
                   ${item.isHighlight || isRecent(item.date)
@@ -162,9 +167,11 @@ export default function LatestNews() {
 
                       {item.link && (
                         <button
-                          onClick={(e) => {
+                        onClick={(e) => {
                             e.stopPropagation(); // Prevent triggering the card click
-                            window.open(item.link.url, '_blank');
+                            if (item.link?.url) {
+                              window.open(item.link.url, '_blank');
+                            }
                           }}
                           className="flex-none text-sm text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap focus:outline-none group/link"
                         >
