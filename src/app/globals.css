@@ -74,3 +74,19 @@ body,
     transform: translateY(0);
   }
 }
+
+/* Hide default cursor */
+* {
+  cursor: none !important;
+}
+
+/* Show default cursor for touch devices */
+@media (hover: none) and (pointer: coarse) {
+  * {
+    cursor: auto !important;
+  }
+  
+  .custom-cursor {
+    display: none !important;
+  }
+}
