@@ -7,9 +7,9 @@ const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const updatePosition = (e) => {
-      setPosition({ x: e.clientX, y: e.clientY });
-    };
+    const updatePosition = (e: MouseEvent) => {
+        setPosition({ x: e.clientX, y: e.clientY });
+      };
 
     const handleMouseEnter = () => setIsVisible(true);
     const handleMouseLeave = () => setIsVisible(false);
