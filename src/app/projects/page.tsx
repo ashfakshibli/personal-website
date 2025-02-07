@@ -3,7 +3,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { SiPython, SiSwift, SiFirebase, SiGooglecloud } from 'react-icons/si';
+import { SiPython, SiSwift, SiFirebase, SiGooglecloud, SiDotnet, SiSharp, SiPytorch, SiOpencv } from 'react-icons/si';
 
 const projects = [
   {
@@ -18,6 +18,8 @@ const projects = [
         technologies: [
           { icon: SiSwift, name: 'Swift' },
           { icon: SiPython, name: 'Python' },
+          { icon: SiPytorch, name: 'PyTorch' },
+          { icon: SiOpencv, name: 'OpenCV' },
           { icon: SiFirebase, name: 'Firebase' },
           { icon: SiGooglecloud, name: 'GCP' }
         ],
@@ -52,8 +54,9 @@ const projects = [
         period: '2020-2022',
         description: 'Windows application for Galaxy Buds management',
         technologies: [
-          { icon: SiSwift, name: 'Swift' },
-          { icon: SiPython, name: 'Python' }
+          { icon: SiDotnet, name: 'ASP.NET' },
+          { icon: SiSharp, name: 'C#' },
+          { icon: SiPython, name: 'Bluetooth Protocol' }
         ],
         highlights: [
           'Secure firmware updates',
@@ -74,7 +77,11 @@ const projects = [
         period: '2023',
         description: 'Novel system for detecting SMS-based phishing attacks',
         technologies: [
-          { icon: SiPython, name: 'Python' }
+          { icon: SiPython, name: 'Python' },
+          { icon: SiPytorch, name: 'PyTorch' },
+          { icon: SiOpencv, name: 'ML/AI' },
+          { icon: SiPython, name: 'LLMs' },
+          { icon: SiPython, name: 'Data Viz' }
         ],
         highlights: [
           'Custom threat detection scoring',
@@ -90,7 +97,10 @@ const projects = [
         period: '2022',
         description: 'PHI leakage analysis in healthcare applications',
         technologies: [
-          { icon: SiPython, name: 'Python' }
+          { icon: SiPython, name: 'Python' },
+          { icon: SiPython, name: 'Static Analysis' },
+          { icon: SiPython, name: 'Threat Modeling' },
+          { icon: SiPython, name: 'Security Testing' }
         ],
         highlights: [
           'Static analysis system',
