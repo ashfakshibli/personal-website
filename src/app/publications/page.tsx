@@ -65,17 +65,14 @@ const publications = [
 
 export default function PublicationsPage() {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-white dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        {/* Page Title */}
+        {/* Page Subtitle */}
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-16"
+          className="text-center mb-8"
         >
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            Publications
-          </h1>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Research work in AI, Cybersecurity, and Computer Vision
           </p>
@@ -137,7 +134,7 @@ export default function PublicationsPage() {
                   {/* Venue Info */}
                   <div className="mt-2">
                     <p className="text-sm text-gray-900 dark:text-white font-medium">
-                      {pub.venueShort}
+                      {pub.venue} ({pub.venueShort})
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400">
                       {`${pub.year}${pub.location ? ` · ${pub.location}` : ''}`}
