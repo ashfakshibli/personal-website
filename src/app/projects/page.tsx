@@ -117,14 +117,6 @@ export default function ProjectsPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <motion.h1 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white"
-        >
-          Projects
-        </motion.h1>
-
         {projects.map((section, sectionIndex) => (
           <div key={section.category} className="mb-16">
             <motion.h2 
