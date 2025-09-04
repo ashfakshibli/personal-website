@@ -68,7 +68,7 @@ export default function TechnicalLogos() {
           <React.Fragment key={group.name}>
             <div className="flex items-center gap-2 flex-wrap md:flex-nowrap justify-center">
               {group.items.map((tech, index) => (
-                <LogoOrIcon tech={tech} groupIndex={groupIndex} index={index} />
+                <LogoOrIcon tech={tech} groupIndex={groupIndex} index={index} key={tech.name + '-' + index} />
               ))}
             </div>
             {groupIndex < techGroups.length - 1 && (
