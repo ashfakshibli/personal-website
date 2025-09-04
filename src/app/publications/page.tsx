@@ -7,6 +7,19 @@ import { FaExternalLinkAlt } from 'react-icons/fa';
 
 const publications = [
   {
+    title: "SmishViz: Towards A Graph-based Visualization System for Monitoring and Characterizing Ongoing Smishing Threats",
+    authors: ["Seyed Mohammad Sanjari", "Ashfak Md Shibli", "Maraz Mia", "Maanak Gupta", "Mir Mehedi Ahsan Pritom"],
+    venue: "ACM Conference on Data and Application Security and Privacy",
+    venueShort: "ACM CODASPY",
+    year: 2025,
+    location: "Pittsburgh, PA",
+    logo: "/images/logos/acm.gif",
+    type: "Conference",
+    link: "https://dl.acm.org/doi/10.1145/3714393.3726499",
+    description: "Graph-based visualization system for monitoring and characterizing ongoing smishing threats. Visualization software: https://smishviz.com/",
+    tags: ["Security", "Visualization", "Smishing", "Graph"]
+  },
+  {
     title: "Use of LLM-based Generative AI Chatbots for Smishing Attacks and Defenses",
     authors: ["A. M. Shibli", "M. M. A. Pritom"],
     venue: "45th IEEE Symposium on Security and Privacy",

@@ -1,9 +1,10 @@
-// src/components/home/TechnicalLogos.tsx
-'use client';
+"use client";
+import LogoOrIcon from "./LogoOrIcon";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { 
+
+import React from "react";
+import { motion } from "framer-motion";
+import {
   SiPython,
   SiSwift,
   SiDotnet,
@@ -11,39 +12,38 @@ import {
   SiFirebase,
   SiGooglecloud,
   SiMysql,
-  SiMongodb,
   SiGit,
   SiJira,
   SiPytorch,
   SiDocker
-} from 'react-icons/si';
+} from "react-icons/si";
 
 const techGroups = [
   {
     name: "Languages & ML",
     items: [
-      { icon: SiPython, color: '#3776AB', name: 'Python' },
-      { icon: SiPytorch, color: '#EE4C2C', name: 'PyTorch' },
-      { icon: SiSwift, color: '#F05138', name: 'Swift' },
-      { icon: SiDotnet, color: '#239120', name: 'C#' },
-      { icon: SiCplusplus, color: '#00599C', name: 'C++' }
+      { icon: SiPython, color: "#3776AB", name: "Python" },
+      { icon: SiSwift, color: "#F05138", name: "Swift" },
+      { icon: SiDotnet, color: "#239120", name: "C#" },
+      { icon: SiCplusplus, color: "#00599C", name: "C++" }
     ]
   },
   {
     name: "Cloud & DevOps",
     items: [
-      { icon: SiFirebase, color: '#FFCA28', name: 'Firebase' },
-      { icon: SiGooglecloud, color: '#4285F4', name: 'Google Cloud' },
-      { icon: SiDocker, color: '#2496ED', name: 'Docker' }
+      { icon: SiFirebase, color: "#FFCA28", name: "Firebase" },
+      { icon: SiGooglecloud, color: "#4285F4", name: "Google Cloud" },
+      { icon: SiDocker, color: "#2496ED", name: "Docker" },
+      { icon: SiPytorch, color: "#EE4C2C", name: "PyTorch" }
     ]
   },
   {
     name: "Databases & Tools",
     items: [
-      { icon: SiMysql, color: '#4479A1', name: 'MySQL' },
-      { icon: SiMongodb, color: '#47A248', name: 'MongoDB' },
-      { icon: SiGit, color: '#F05032', name: 'Git' },
-      { icon: SiJira, color: '#0052CC', name: 'Jira' }
+      { icon: SiMysql, color: "#4479A1", name: "MySQL" },
+      { name: "RealmDB", logo: "/images/logos/realmdb.svg" },
+      { icon: SiGit, color: "#F05032", name: "Git" },
+      { icon: SiJira, color: "#0052CC", name: "Jira" }
     ]
   }
 ];
@@ -68,26 +68,7 @@ export default function TechnicalLogos() {
           <React.Fragment key={group.name}>
             <div className="flex items-center gap-2 flex-wrap md:flex-nowrap justify-center">
               {group.items.map((tech, index) => (
-                <motion.div
-                  key={tech.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: (groupIndex * group.items.length + index) * 0.05 }}
-                  whileHover={{ scale: 1.1 }}
-                  className="flex-shrink-0"
-                >
-                  <div className="relative group">
-                    <div className="absolute inset-0 bg-blue-50 dark:bg-blue-900/30 rounded-full 
-                                  transform transition-all duration-200 group-hover:scale-110 -z-10" />
-                    <div className="p-2">
-                      <tech.icon 
-                        className="w-5 h-5 transition-transform duration-200"
-                        style={{ color: tech.color }}
-                        title={tech.name}
-                      />
-                    </div>
-                  </div>
-                </motion.div>
+                <LogoOrIcon tech={tech} groupIndex={groupIndex} index={index} />
               ))}
             </div>
             {groupIndex < techGroups.length - 1 && (

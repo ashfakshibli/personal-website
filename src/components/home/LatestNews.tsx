@@ -18,6 +18,18 @@ interface NewsItem {
 
 const unsortedNewsItems: NewsItem[] = [
   {
+    date: new Date('2025-06-04'),
+    content: 'Presented paper "SmishViz: Towards A Graph-based Visualization System for Monitoring and Characterizing Ongoing Smishing Threats" at ACM CODASPY 2025',
+    isHighlight: true,
+    link: {
+      url: 'https://dl.acm.org/doi/10.1145/3714393.3726499',
+      text: 'View Paper'
+    },
+    location: 'Pittsburgh, PA, USA',
+    conference: 'ACM CODASPY 2025',
+    subtitle: 'Visualization software: https://smishviz.com/'
+  },
+  {
     date: new Date('2024-05-20'),
     content: 'Presented research poster on SMS Phishing Detection using LLMs',
     isHighlight: true,

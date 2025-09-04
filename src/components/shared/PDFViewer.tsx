@@ -4,9 +4,10 @@ import { X } from 'lucide-react';
 interface PDFViewerProps {
   isOpen: boolean;
   onClose: () => void;
+  fileUrl: string;
 }
 
-const PDFViewer: React.FC<PDFViewerProps> = ({ isOpen, onClose }) => {
+const PDFViewer: React.FC<PDFViewerProps> = ({ isOpen, onClose, fileUrl }) => {
   if (!isOpen) return null;
 
   return (
@@ -23,7 +24,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ isOpen, onClose }) => {
         {/* PDF Viewer */}
         <div className="w-full h-full bg-white rounded-lg shadow-xl overflow-hidden">
           <iframe
-            src="/Ashfak_Resume_2025.pdf#toolbar=0"
+            src={`${fileUrl}#toolbar=0`}
             className="w-full h-full"
             title="Resume PDF"
           />

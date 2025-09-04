@@ -22,7 +22,11 @@ export default function HeroSection() {
 
   return (
     <div>
-      <PDFViewer isOpen={showResume} onClose={() => setShowResume(false)} />
+      <PDFViewer
+        isOpen={showResume}
+        onClose={() => setShowResume(false)}
+        fileUrl="/Ashfak_Shibli_Software_Engineer.pdf"
+      />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Profile Section */}
         <div className="lg:col-span-5 flex flex-col items-center px-4 md:px-0">
@@ -116,7 +120,7 @@ export default function HeroSection() {
               </motion.button>
 
               <motion.a
-                href="/Ashfak_Resume_2025_For Lawyers.pdf"
+                href="/Ashfak_Shibli_Software_Engineer.pdf"
                 download
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
