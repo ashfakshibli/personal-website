@@ -11,6 +11,10 @@ interface NewsItem {
     url: string;
     text: string;
   };
+  links?: {
+    url: string;
+    text: string;
+  }[];
   location?: string;
   conference?: string;
   subtitle?: string;
@@ -21,13 +25,18 @@ const unsortedNewsItems: NewsItem[] = [
     date: new Date('2025-06-04'),
     content: 'Presented paper "SmishViz: Towards A Graph-based Visualization System for Monitoring and Characterizing Ongoing Smishing Threats" at ACM CODASPY 2025',
     isHighlight: true,
-    link: {
-      url: 'https://dl.acm.org/doi/10.1145/3714393.3726499',
-      text: 'View Paper'
-    },
+    links: [
+      {
+        url: 'https://dl.acm.org/doi/10.1145/3714393.3726499',
+        text: 'View Paper'
+      },
+      {
+        url: 'https://smishviz.com',
+        text: 'View Demo'
+      }
+    ],
     location: 'Pittsburgh, PA, USA',
-    conference: 'ACM CODASPY 2025',
-    subtitle: 'Visualization software: https://smishviz.com/'
+    conference: 'ACM CODASPY 2025'
   },
   {
     date: new Date('2024-05-20'),
@@ -151,6 +160,8 @@ export default function LatestNews() {
                     e.stopPropagation(); // Prevent triggering the card click
                     if (item.link?.url) {
                       window.open(item.link.url, '_blank');
+                    } else if (item.links && item.links.length === 1) {
+                      window.open(item.links[0].url, '_blank');
                     }
                   }}
                 className={`
@@ -158,7 +169,7 @@ export default function LatestNews() {
                   ${item.isHighlight || isRecent(item.date)
                     ? 'bg-blue-50 dark:bg-blue-900/30'
                     : 'bg-white dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-700'}
-                  ${item.link ? 'cursor-pointer hover:shadow-md' : ''}
+                  ${(item.link || (item.links && item.links.length === 1)) ? 'cursor-pointer hover:shadow-md' : ''}
               `}>
                 <div className="flex justify-between items-start gap-4">
                   <div className="flex-grow">
@@ -177,7 +188,25 @@ export default function LatestNews() {
                         )}
                       </p>
 
-                      {item.link && (
+                      {item.links ? (
+                        <div className="flex-none flex gap-2 flex-wrap">
+                          {item.links.map((link, linkIndex) => (
+                            <button
+                              key={linkIndex}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                window.open(link.url, '_blank');
+                              }}
+                              className="text-sm text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap focus:outline-none group/link"
+                            >
+                              {link.text}
+                              <svg className="inline-block w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                              </svg>
+                            </button>
+                          ))}
+                        </div>
+                      ) : item.link && (
                         <button
                         onClick={(e) => {
                             e.stopPropagation(); // Prevent triggering the card click
