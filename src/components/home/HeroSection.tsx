@@ -64,7 +64,7 @@ export default function HeroSection() {
             
             {/* Skills Tags */}
             <div className="flex justify-center items-center gap-2 md:gap-3 my-6">
-              {['AI/ML', 'Cybersecurity', 'Mobile Dev'].map((skill, index) => (
+              {['AI/ML', 'Cybersecurity', 'Application Dev'].map((skill, index) => (
                 <motion.span
                   key={skill}
                   initial={{ opacity: 0, x: -20 }}
