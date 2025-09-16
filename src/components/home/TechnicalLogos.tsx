@@ -15,7 +15,9 @@ import {
   SiGit,
   SiJira,
   SiPytorch,
-  SiDocker
+  SiDocker,
+  SiPhp,
+  SiJavascript
 } from "react-icons/si";
 
 const techGroups = [
@@ -23,6 +25,8 @@ const techGroups = [
     name: "Languages & ML",
     items: [
       { icon: SiPython, color: "#3776AB", name: "Python" },
+      { icon: SiJavascript, color: "#F7DF1E", name: "JavaScript" },
+      { icon: SiPhp, color: "#777BB4", name: "PHP" },
       { icon: SiSwift, color: "#F05138", name: "Swift" },
       { icon: SiDotnet, color: "#239120", name: "C#" },
       { icon: SiCplusplus, color: "#00599C", name: "C++" }
