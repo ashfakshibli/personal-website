@@ -25,7 +25,7 @@ export default function HeroSection() {
       <PDFViewer
         isOpen={showResume}
         onClose={() => setShowResume(false)}
-        fileUrl="/Ashfak_Shibli_Software_Engineer.pdf"
+        fileUrl="/Ashfak_Shibli_CV_January_2026.pdf"
       />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Profile Section */}
@@ -83,7 +83,7 @@ export default function HeroSection() {
               ))}
             </div>
             
-            {/* Resume Buttons */}
+            {/* CV Buttons */}
             <div className="flex justify-center space-x-3 mt-8">
               <motion.button
                 initial={{ opacity: 0, y: 20 }}
@@ -116,11 +116,11 @@ export default function HeroSection() {
                     d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                   />
                 </svg>
-                View Resume
+                View CV
               </motion.button>
 
               <motion.a
-                href="/Ashfak_Shibli_Software_Engineer.pdf"
+                href="/Ashfak_Shibli_CV_January_2026.pdf"
                 download
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -145,7 +145,7 @@ export default function HeroSection() {
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                   />
                 </svg>
-                Download
+                Download CV
               </motion.a>
             </div>
           </motion.div>
