@@ -20,15 +20,15 @@ export default function HeroSection() {
       />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Profile Section */}
-        <div className="lg:col-span-5 flex flex-col items-center px-4 md:px-0">
+        <div className="lg:col-span-5 flex flex-col items-center px-4 md:px-0 lg:h-[500px] lg:justify-start">
           {/* Profile Image */}
           <motion.div
             initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
-            className="relative mx-auto w-full max-w-[320px] mt-4 mb-8"
+            className="relative mx-auto w-full max-w-[300px] mt-0 mb-5"
           >
-            <div className="relative w-56 h-56 md:w-64 md:h-64 mx-auto rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
+            <div className="relative w-44 h-44 md:w-52 md:h-52 mx-auto rounded-full overflow-hidden bg-gray-100 dark:bg-gray-800 shadow-lg">
               <Image
                 src="/images/ashfak-headshot.jpg"
                 alt="Ashfak Md Shibli"
@@ -44,27 +44,27 @@ export default function HeroSection() {
             initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="text-center w-full space-y-5"
+            className="text-center w-full space-y-3"
           >
-            <h1 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
               Researcher & Software Engineer
             </h1>
-            <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
-              Computer Science Grad
+            <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white">
+              MS, Computer Science
             </h2>
             
             {/* Skills Tags */}
-            <div className="flex justify-center items-center gap-2 md:gap-3 my-6">
+            <div className="flex justify-center items-center gap-2 my-4">
               {['AI/ML', 'Cybersecurity', 'Application Dev'].map((skill, index) => (
                 <motion.span
                   key={skill}
                   initial={false}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
-                  className="px-4 py-2 md:px-5 md:py-2.5
+                  className="px-3 py-1.5 md:px-4 md:py-2
                            bg-blue-100 dark:bg-blue-900 
                            text-blue-800 dark:text-blue-100 
-                           rounded-full text-base md:text-lg font-medium
+                           rounded-full text-sm md:text-base font-medium
                            shadow-sm dark:shadow-blue-500/20
                            hover:shadow-md transition-shadow duration-200
                            whitespace-nowrap"
@@ -75,14 +75,14 @@ export default function HeroSection() {
             </div>
             
             {/* CV Buttons */}
-            <div className="flex justify-center space-x-3 mt-8">
+            <div className="flex justify-center space-x-3 mt-5">
               <motion.button
                 initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
                 onClick={() => setShowResume(true)}
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 
-                         text-white text-sm font-medium rounded-full 
+                className="px-3.5 py-1.5 bg-blue-600 hover:bg-blue-700 
+                         text-white text-xs md:text-sm font-medium rounded-full 
                          shadow-lg hover:shadow-xl 
                          transform hover:-translate-y-0.5 
                          transition-all duration-150
@@ -116,8 +116,8 @@ export default function HeroSection() {
                 initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
-                className="px-4 py-2 bg-gray-600 hover:bg-gray-700 
-                         text-white text-sm font-medium rounded-full 
+                className="px-3.5 py-1.5 bg-gray-600 hover:bg-gray-700 
+                         text-white text-xs md:text-sm font-medium rounded-full 
                          shadow-lg hover:shadow-xl 
                          transform hover:-translate-y-0.5 
                          transition-all duration-150
@@ -142,31 +142,28 @@ export default function HeroSection() {
           </motion.div>
         </div>
 
-        {/* Right Column: Timeline and Tech Stack */}
+        {/* Right Column: Timeline */}
         <div className="lg:col-span-7">
-          <div>
-            {/* Timeline Section */}
-            <motion.div
-              initial={false}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="w-full overflow-x-hidden px-4 md:px-0"
-            >
-              <CompactTimeline />
-            </motion.div>
-
-            {/* Technical Logos Section */}
-            <motion.div
-              initial={false}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8 }}
-              className="w-full px-4 md:px-0 mt-20 md:-mt-16"
-            >
-              <TechnicalLogos />
-            </motion.div>
-          </div>
+          <motion.div
+            initial={false}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="w-full overflow-x-hidden px-4 md:px-0"
+          >
+            <CompactTimeline />
+          </motion.div>
         </div>
       </div>
+
+      {/* Full-Width Tech Stack */}
+      <motion.div
+        initial={false}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.8 }}
+        className="w-full max-w-7xl mx-auto px-4 md:px-0 -mt-2"
+      >
+        <TechnicalLogos />
+      </motion.div>
     </div>
   );
 }

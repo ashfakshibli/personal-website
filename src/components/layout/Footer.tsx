@@ -47,17 +47,17 @@ export default function Footer() {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/publications" className="text-gray-300 hover:text-white">
+                <Link href="/#publications" className="text-gray-300 hover:text-white">
                   Publications
                 </Link>
               </li>
               <li>
-                <Link href="/projects" className="text-gray-300 hover:text-white">
+                <Link href="/#projects" className="text-gray-300 hover:text-white">
                   Projects
                 </Link>
               </li>
               <li>
-                <Link href="/awards" className="text-gray-300 hover:text-white">
+                <Link href="/#awards" className="text-gray-300 hover:text-white">
                   Awards
                 </Link>
               </li>

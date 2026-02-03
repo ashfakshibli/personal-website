@@ -222,10 +222,22 @@ function PublicationCard({ pub, delay }: { pub: Publication; delay: number }) {
   );
 }
 
-export default function PublicationsPage() {
+export default function PublicationsPage({ embedded = false }: { embedded?: boolean }) {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">
+    <div
+      className={`bg-white dark:bg-gray-900 px-4 sm:px-6 lg:px-8 ${
+        embedded ? 'py-8' : 'min-h-screen py-8'
+      }`}
+    >
       <div className="max-w-7xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-6"
+        >
+          Publications
+        </motion.h2>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

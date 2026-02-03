@@ -7,6 +7,7 @@ interface NewsItem {
   date: string; // YYYY-MM-DD
   content: string;
   isHighlight?: boolean;
+  isRecent?: boolean;
   link?: {
     url: string;
     text: string;
@@ -25,6 +26,7 @@ const unsortedNewsItems: NewsItem[] = [
     date: '2025-12-15',
     content: 'Received Employee of the Year award at Athlete Den',
     isHighlight: true,
+    isRecent: true,
     link: {
       url: '/awards',
       text: 'View Award'
@@ -32,9 +34,21 @@ const unsortedNewsItems: NewsItem[] = [
     location: 'New York, USA'
   },
   {
+    date: '2025-12-01',
+    content: 'Submitted SMS Phishing survey paper to IEEE Access (under review)',
+    isHighlight: true,
+    isRecent: true,
+    link: {
+      url: '/publications#under-review',
+      text: 'View Publication'
+    },
+    conference: 'IEEE Access (Under Review)'
+  },
+  {
     date: '2025-11-10',
     content: 'Received Eminence Award 2025 (MS Best Paper) from Tennessee Tech University',
     isHighlight: true,
+    isRecent: true,
     link: {
       url: '/awards',
       text: 'View Award'
@@ -45,6 +59,7 @@ const unsortedNewsItems: NewsItem[] = [
     date: '2025-06-04',
     content: 'Presented paper "SmishViz: Towards A Graph-based Visualization System for Monitoring and Characterizing Ongoing Smishing Threats" at ACM CODASPY 2025',
     isHighlight: true,
+    isRecent: true,
     links: [
       {
         url: 'https://dl.acm.org/doi/10.1145/3714393.3726499',
@@ -57,6 +72,13 @@ const unsortedNewsItems: NewsItem[] = [
     ],
     location: 'Pittsburgh, PA, USA',
     conference: 'ACM CODASPY 2025'
+  },
+  {
+    date: '2025-02-15',
+    content: 'Led STEM education outreach at University of Tennessee Chattanooga Open House',
+    isHighlight: true,
+    isRecent: true,
+    location: 'Chattanooga, TN, USA'
   },
   {
     date: '2024-05-20',
@@ -203,7 +225,7 @@ export default function LatestNews() {
                           : 'text-gray-900 dark:text-gray-100'}
                       `}>
                         {item.content}
-                        {item.isHighlight && (
+                        {item.isRecent && (
                           <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-800 text-blue-800 dark:text-blue-200">
                             New
                           </span>

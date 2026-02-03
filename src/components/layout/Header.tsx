@@ -9,11 +9,12 @@ import { SiGooglescholar } from 'react-icons/si';
 import { useTheme } from 'next-themes';
 
 const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Publications', href: '/publications' },
-  { name: 'Awards', href: '/awards' },
+  { name: 'Home', href: '/#home', sectionId: 'home' },
+  { name: 'News', href: '/#news', sectionId: 'news' },
+  { name: 'About', href: '/#about', sectionId: 'about' },
+  { name: 'Projects', href: '/#projects', sectionId: 'projects' },
+  { name: 'Publications', href: '/#publications', sectionId: 'publications' },
+  { name: 'Awards', href: '/#awards', sectionId: 'awards' },
 ];
 
 const socialLinks = [
@@ -45,17 +46,83 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const { setTheme, resolvedTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState('home');
 
   useEffect(() => {
     setMounted(true);
-    
-    const handleScroll = () => {
+    const handleScrollState = () => {
       setIsScrolled(window.scrollY > 10);
     };
+    handleScrollState();
+    window.addEventListener('scroll', handleScrollState, { passive: true });
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    if (pathname !== '/') {
+      const routeSectionMap: Record<string, string> = {
+        '/': 'home',
+        '/about': 'about',
+        '/projects': 'projects',
+        '/publications': 'publications',
+        '/awards': 'awards'
+      };
+      setActiveSection(routeSectionMap[pathname] || 'home');
+      return () => {
+        window.removeEventListener('scroll', handleScrollState);
+      };
+    }
+
+    const sectionIds = navigation.map((item) => item.sectionId);
+    const getHashSection = () => {
+      const hash = window.location.hash.replace('#', '');
+      return sectionIds.includes(hash) ? hash : null;
+    };
+
+    const handleHashChange = () => {
+      const hashSection = getHashSection();
+      if (hashSection) {
+        setActiveSection(hashSection);
+      } else if (!window.location.hash) {
+        setActiveSection('home');
+      }
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting);
+        if (visible.length === 0) return;
+
+        const targetLine = 96;
+        const bestEntry = visible.sort(
+          (a, b) =>
+            Math.abs(a.boundingClientRect.top - targetLine) -
+            Math.abs(b.boundingClientRect.top - targetLine)
+        )[0];
+        const nextSection = bestEntry?.target.id;
+
+        if (nextSection && sectionIds.includes(nextSection)) {
+          setActiveSection(nextSection);
+        }
+      },
+      {
+        root: null,
+        rootMargin: '-72px 0px -55% 0px',
+        threshold: [0.05, 0.15, 0.3, 0.5, 0.7]
+      }
+    );
+
+    sectionIds.forEach((id) => {
+      const element = document.getElementById(id);
+      if (element) observer.observe(element);
+    });
+
+    handleHashChange();
+    window.addEventListener('hashchange', handleHashChange);
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollState);
+      window.removeEventListener('hashchange', handleHashChange);
+      observer.disconnect();
+    };
+  }, [pathname]);
 
   const toggleTheme = () => {
     const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
@@ -72,7 +139,7 @@ export default function Header() {
       {/* Logo/Brand with Social Links */}
       <div className="flex items-center space-x-2 sm:space-x-4">
       <Link 
-      href="/" 
+      href="/#home" 
       className="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white transition-colors duration-300 whitespace-nowrap pl-8"
       >
       Ashfak Md Shibli
@@ -99,19 +166,24 @@ export default function Header() {
           
           {/* Desktop Navigation */}
           <div className="hidden sm:flex sm:items-center sm:space-x-4">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-300 ${
-                  pathname === item.href
-                    ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
-                    : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+            {navigation.map((item) => {
+              const isActive = activeSection === item.sectionId;
+
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  onClick={() => setActiveSection(item.sectionId)}
+                  className={`px-3 py-2 text-sm font-medium rounded-md transition-colors duration-300 ${
+                    isActive
+                      ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
+                      : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                  }`}
+                >
+                  {item.name}
+                </Link>
+              );
+            })}
             
             {/* Theme Toggle Button */}
             <button
@@ -165,20 +237,27 @@ export default function Header() {
         {isMobileMenuOpen && (
           <div className="sm:hidden">
             <div className="space-y-1 pb-3 pt-2">
-              {navigation.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-300 ${
-                    pathname === item.href
-                      ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
-                      : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
-                  }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              ))}
+              {navigation.map((item) => {
+                const isActive = activeSection === item.sectionId;
+
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.href}
+                    className={`block px-3 py-2 text-base font-medium rounded-md transition-colors duration-300 ${
+                      isActive
+                        ? 'bg-gray-900 text-white dark:bg-white dark:text-gray-900'
+                        : 'text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800'
+                    }`}
+                    onClick={() => {
+                      setActiveSection(item.sectionId);
+                      setIsMobileMenuOpen(false);
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}

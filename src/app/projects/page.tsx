@@ -157,10 +157,22 @@ const projects = [
   }
 ];
 
-export default function ProjectsPage() {
+export default function ProjectsPage({ embedded = false }: { embedded?: boolean }) {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
+    <div
+      className={`bg-white dark:bg-gray-900 px-4 sm:px-6 lg:px-8 ${
+        embedded ? 'py-8' : 'min-h-screen py-16'
+      }`}
+    >
       <div className="max-w-7xl mx-auto">
+        <motion.h2
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-10"
+        >
+          Projects
+        </motion.h2>
+
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
           {projects.map((section, sectionIndex) => (
             <div key={section.category} className="space-y-6">
