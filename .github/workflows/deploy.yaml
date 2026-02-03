@@ -83,20 +83,29 @@ jobs:
         fi
 
         # Ensure host key entry exists for non-default SSH ports too
-        if ! ssh-keygen -F "[${{ secrets.SSH_HOST }}]:${{ secrets.SSH_PORT }}" -f ~/.ssh/known_hosts >/dev/null 2>&1; then
-          if ! ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null; then
-            echo "Warning: ssh-keyscan failed for ${{ secrets.SSH_HOST }}:${{ secrets.SSH_PORT }}, proceeding with existing known_hosts."
-          fi
+          # Use pinned known_hosts content from secret (no scanning needed)
+          printf "%s\n" "${{ secrets.SSH_KNOWN_HOSTS }}" | tr -d '\r' > ~/.ssh/known_hosts
         fi
-        sort -u ~/.ssh/known_hosts -o ~/.ssh/known_hosts
 
-        # Optional pinning: set SSH_HOST_FINGERPRINT secret to enforce exact server key
+        # If a host fingerprint is provided, strictly validate the scanned key against it
         if [ -n "${{ secrets.SSH_HOST_FINGERPRINT }}" ]; then
-          if ! ssh-keygen -lf ~/.ssh/known_hosts | awk '{print $2}' | grep -Fx "${{ secrets.SSH_HOST_FINGERPRINT }}" >/dev/null; then
-            echo "Host fingerprint mismatch."
-            ssh-keygen -lf ~/.ssh/known_hosts || true
+          tmpfile="$(mktemp)"
+          # Scan the host key for the specific host:port
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" > "$tmpfile" 2>/dev/null
+          if ssh-keygen -lf "$tmpfile" | awk '{print $2}' | grep -Fx "${{ secrets.SSH_HOST_FINGERPRINT }}" >/dev/null; then
+            # Fingerprint matches: trust only this scanned key
+            mv "$tmpfile" ~/.ssh/known_hosts
+            chmod 600 ~/.ssh/known_hosts
+          else
+            echo "Scanned host key fingerprint mismatch."
+            ssh-keygen -lf "$tmpfile" || true
+            rm -f "$tmpfile"
             exit 1
           fi
+        elif [ -z "${{ secrets.SSH_KNOWN_HOSTS }}" ]; then
+          # No pinned known_hosts or fingerprint: fall back to TOFU but do not append
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" > ~/.ssh/known_hosts 2>/dev/null
+          chmod 600 ~/.ssh/known_hosts
         fi
 
         SSH_OPTS="-o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts -o IdentitiesOnly=yes"
