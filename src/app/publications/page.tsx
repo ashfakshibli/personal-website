@@ -125,7 +125,8 @@ function PublicationCard({ pub, delay }: { pub: Publication; delay: number }) {
   const hasLink = Boolean(pub.link);
   const openLink = () => {
     if (pub.link) {
-      window.open(pub.link, '_blank');
+      const popup = window.open(pub.link, '_blank', 'noopener,noreferrer');
+      if (popup) popup.opener = null;
     }
   };
 

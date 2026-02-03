@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "eslint . --max-warnings=0",
+    "verify:render": "node scripts/verify-render.mjs"
   },
   "dependencies": {
     "@headlessui/react": "^2.2.0",
@@ -14,21 +15,25 @@
     "@tailwindcss/typography": "^0.5.16",
     "framer-motion": "^12.0.1",
     "lucide-react": "^0.474.0",
-    "next": "15.1.6",
+    "next": "^16.1.6",
     "next-themes": "^0.4.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
     "react-icons": "^5.5.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
+    "@eslint/eslintrc": "^3.3.3",
     "@types/node": "20.17.16",
     "@types/react": "19.0.8",
     "@types/react-dom": "^19",
-    "eslint": "^9",
-    "eslint-config-next": "15.1.6",
+    "eslint": "^9.39.2",
+    "eslint-config-next": "^16.1.6",
+    "playwright": "^1.58.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "5.7.3"
+  },
+  "overrides": {
+    "glob": "^10.5.0"
   }
 }

@@ -9,12 +9,13 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
     
     - name: Use Node.js
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v4
       with:
         node-version: '20'
+        cache: 'npm'
         
     - name: Install dependencies and build
       run: |
@@ -29,7 +30,6 @@ jobs:
         # Copy necessary files
         cp -r .next deploy/
         cp -r public deploy/
-        cp -r src deploy/
         cp package.json package-lock.json next.config.ts tsconfig.json deploy/
         
         # Create server.js
@@ -74,7 +74,8 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
         chmod 600 ~/.ssh/deploy_key
-        ssh-keyscan -p ${{ secrets.SSH_PORT }} ${{ secrets.SSH_HOST }} >> ~/.ssh/known_hosts
+        echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
         
         # Upload file
         echo "Uploading deploy.zip..."
@@ -91,17 +92,21 @@ jobs:
             exit 1
           fi
           
-          # Keep node_modules and remove everything else
-          find . -mindepth 1 ! -name 'node_modules' ! -name 'deploy.zip' -exec rm -rf {} +
+          # Remove old deployment content
+          find . -mindepth 1 ! -name 'deploy.zip' -exec rm -rf {} +
           
           # Extract new files
           unzip -o deploy.zip
           rm deploy.zip
+
+          # Install production dependencies cleanly
+          export NODE_ENV=production
+          npm ci --omit=dev
           
           # Set correct permissions
           chmod 755 .
           chmod 644 .htaccess
-          chmod -R 755 .next public src
+          chmod -R 755 .next public
           
           echo "Deployment completed. Files in directory:"
           ls -la
