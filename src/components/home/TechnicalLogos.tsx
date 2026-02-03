@@ -45,7 +45,6 @@ const techGroups = [
     name: "Databases & Tools",
     items: [
       { icon: SiMysql, color: "#4479A1", name: "MySQL" },
-      { name: "RealmDB", logo: "/images/logos/realmdb.svg" },
       { icon: SiGit, color: "#F05032", name: "Git" },
       { icon: SiJira, color: "#0052CC", name: "Jira" }
     ]
@@ -56,14 +55,14 @@ export default function TechnicalLogos() {
   return (
     <div className="w-full bg-white dark:bg-gray-800 rounded-xl shadow-lg px-4 py-2">
       <motion.h3 
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1 }}
         className="text-sm font-medium text-gray-500 dark:text-gray-400 mb-1 text-center"
       >
         Tech Stack
       </motion.h3>
       <motion.div 
-        initial={{ opacity: 0 }}
+        initial={false}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
         className="flex flex-wrap md:flex-nowrap items-center md:justify-between justify-center gap-y-3 px-2"

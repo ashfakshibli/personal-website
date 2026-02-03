@@ -88,7 +88,7 @@ const TimelineItemDesktop: React.FC<TimelineItemProps> = ({ item, index }) => {
   if (index === 2) {
     return (
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: index * 0.2 }}
         className="absolute"
@@ -131,7 +131,7 @@ const TimelineItemDesktop: React.FC<TimelineItemProps> = ({ item, index }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.2 }}
       className="absolute"
@@ -149,7 +149,7 @@ const TimelineItemDesktop: React.FC<TimelineItemProps> = ({ item, index }) => {
 const TimelineItemMobile: React.FC<TimelineItemProps> = ({ item, index }) => {
   return (
     <motion.div
-      initial={{ opacity: 0, x: -20 }}
+      initial={false}
       animate={{ opacity: 1, x: 0 }}
       transition={{ delay: index * 0.2 }}
       className="flex flex-col items-center bg-white dark:bg-gray-800 
@@ -198,7 +198,7 @@ const TimelineContent: React.FC<{ item: TimelineItem }> = ({ item }) => {
 
           {item.extraContent && (
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
               className="mt-6"

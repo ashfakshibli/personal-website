@@ -13,6 +13,7 @@ const navigation = [
   { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },
   { name: 'Publications', href: '/publications' },
+  { name: 'Awards', href: '/awards' },
 ];
 
 const socialLinks = [
@@ -60,10 +61,6 @@ export default function Header() {
     const nextTheme = resolvedTheme === 'dark' ? 'light' : 'dark';
     setTheme(nextTheme);
   };
-
-  if (!mounted) {
-    return null;
-  }
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
@@ -123,7 +120,7 @@ export default function Header() {
                        transition-colors duration-300"
               aria-label="Toggle theme"
             >
-              {resolvedTheme === 'dark' ? (
+              {mounted && resolvedTheme === 'dark' ? (
                 <FiSun className="w-5 h-5" />
               ) : (
                 <FiMoon className="w-5 h-5" />
@@ -139,7 +136,7 @@ export default function Header() {
                        transition-colors duration-300"
               aria-label="Toggle theme"
             >
-              {resolvedTheme === 'dark' ? (
+              {mounted && resolvedTheme === 'dark' ? (
                 <FiSun className="w-5 h-5" />
               ) : (
                 <FiMoon className="w-5 h-5" />

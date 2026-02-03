@@ -22,6 +22,26 @@ interface NewsItem {
 
 const unsortedNewsItems: NewsItem[] = [
   {
+    date: new Date('2025-12-15'),
+    content: 'Received Employee of the Year award at Athlete Den',
+    isHighlight: true,
+    link: {
+      url: '/awards',
+      text: 'View Award'
+    },
+    location: 'New York, USA'
+  },
+  {
+    date: new Date('2025-11-10'),
+    content: 'Received Eminence Award 2025 (MS Best Paper) from Tennessee Tech University',
+    isHighlight: true,
+    link: {
+      url: '/awards',
+      text: 'View Award'
+    },
+    location: 'Cookeville, TN, USA'
+  },
+  {
     date: new Date('2025-06-04'),
     content: 'Presented paper "SmishViz: Towards A Graph-based Visualization System for Monitoring and Characterizing Ongoing Smishing Threats" at ACM CODASPY 2025',
     isHighlight: true,
@@ -108,11 +128,15 @@ export default function LatestNews() {
   threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
 
   const isRecent = (date: Date) => date >= threeMonthsAgo;
+  const openExternal = (url: string) => {
+    const popup = window.open(url, '_blank', 'noopener,noreferrer');
+    if (popup) popup.opener = null;
+  };
 
   return (
     <div className="py-6">
       <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+        initial={false}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white"
@@ -130,7 +154,7 @@ export default function LatestNews() {
             .map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, x: -20 }}
+              initial={false}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
@@ -159,9 +183,9 @@ export default function LatestNews() {
                 onClick={(e) => {
                     e.stopPropagation(); // Prevent triggering the card click
                     if (item.link?.url) {
-                      window.open(item.link.url, '_blank');
+                      openExternal(item.link.url);
                     } else if (item.links && item.links.length === 1) {
-                      window.open(item.links[0].url, '_blank');
+                      openExternal(item.links[0].url);
                     }
                   }}
                 className={`
@@ -195,7 +219,7 @@ export default function LatestNews() {
                               key={linkIndex}
                               onClick={(e) => {
                                 e.stopPropagation();
-                                window.open(link.url, '_blank');
+                                openExternal(link.url);
                               }}
                               className="text-sm text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap focus:outline-none group/link"
                             >
@@ -211,7 +235,7 @@ export default function LatestNews() {
                         onClick={(e) => {
                             e.stopPropagation(); // Prevent triggering the card click
                             if (item.link?.url) {
-                              window.open(item.link.url, '_blank');
+                              openExternal(item.link.url);
                             }
                           }}
                           className="flex-none text-sm text-blue-600 dark:text-blue-400 hover:underline whitespace-nowrap focus:outline-none group/link"

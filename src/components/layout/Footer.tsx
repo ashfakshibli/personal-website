@@ -33,7 +33,7 @@ export default function Footer() {
                 <FaLinkedin className="h-6 w-6" />
               </a>
               <a 
-                href="https://scholar.google.com/citations?user=your-id" 
+                href="https://scholar.google.com/citations?user=-Py4nOsAAAAJ" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-gray-300 hover:text-white"
@@ -54,6 +54,11 @@ export default function Footer() {
               <li>
                 <Link href="/projects" className="text-gray-300 hover:text-white">
                   Projects
+                </Link>
+              </li>
+              <li>
+                <Link href="/awards" className="text-gray-300 hover:text-white">
+                  Awards
                 </Link>
               </li>
             </ul>

@@ -1,38 +1,29 @@
 // src/components/home/HeroSection.tsx
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CompactTimeline from './CompactTimeline';
 import TechnicalLogos from './TechnicalLogos';
-import { useTheme } from 'next-themes';
 import PDFViewer from '@/components/shared/PDFViewer';
 
 export default function HeroSection() {
-  const [mounted, setMounted] = useState(false);
   const [showResume, setShowResume] = useState(false);
-  const { resolvedTheme } = useTheme();
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
 
   return (
     <div>
       <PDFViewer
         isOpen={showResume}
         onClose={() => setShowResume(false)}
-        fileUrl="/Ashfak_Shibli_Software_Engineer.pdf"
+        fileUrl="/Ashfak_Shibli_CV_January_2026.pdf"
       />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Profile Section */}
         <div className="lg:col-span-5 flex flex-col items-center px-4 md:px-0">
           {/* Profile Image */}
           <motion.div
-            initial={{ opacity: 0 }}
+            initial={false}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
             className="relative mx-auto w-full max-w-[320px] mt-4 mb-8"
@@ -50,7 +41,7 @@ export default function HeroSection() {
 
           {/* Title and Description */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={false}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="text-center w-full space-y-5"
@@ -67,7 +58,7 @@ export default function HeroSection() {
               {['AI/ML', 'Cybersecurity', 'Application Dev'].map((skill, index) => (
                 <motion.span
                   key={skill}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={false}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3 + index * 0.1 }}
                   className="px-4 py-2 md:px-5 md:py-2.5
@@ -83,10 +74,10 @@ export default function HeroSection() {
               ))}
             </div>
             
-            {/* Resume Buttons */}
+            {/* CV Buttons */}
             <div className="flex justify-center space-x-3 mt-8">
               <motion.button
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
                 onClick={() => setShowResume(true)}
@@ -116,13 +107,13 @@ export default function HeroSection() {
                     d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                   />
                 </svg>
-                View Resume
+                View CV
               </motion.button>
 
               <motion.a
-                href="/Ashfak_Shibli_Software_Engineer.pdf"
+                href="/Ashfak_Shibli_CV_January_2026.pdf"
                 download
-                initial={{ opacity: 0, y: 20 }}
+                initial={false}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 }}
                 className="px-4 py-2 bg-gray-600 hover:bg-gray-700 
@@ -145,7 +136,7 @@ export default function HeroSection() {
                     d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                   />
                 </svg>
-                Download
+                Download CV
               </motion.a>
             </div>
           </motion.div>
@@ -156,7 +147,7 @@ export default function HeroSection() {
           <div>
             {/* Timeline Section */}
             <motion.div
-              initial={{ opacity: 0, x: 20 }}
+              initial={false}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.3 }}
               className="w-full overflow-x-hidden px-4 md:px-0"
@@ -166,7 +157,7 @@ export default function HeroSection() {
 
             {/* Technical Logos Section */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={false}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8 }}
               className="w-full px-4 md:px-0 mt-20 md:-mt-16"
