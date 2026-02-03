@@ -1,135 +1,119 @@
-# Portfolio Website
+# Personal Website
 
-![Next.js](https://img.shields.io/badge/Next.js-13-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38B2AC)
-![Framer Motion](https://img.shields.io/badge/Framer_Motion-10.16-ff69b4)
+This repository contains the source code for Ashfak Md Shibli's portfolio website.
 
-A modern, responsive portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features a dark mode toggle, smooth animations, and a clean, professional design.
+## Table of Contents
+- [Overview](#overview)
+- [Live Site](#live-site)
+- [One-Page Navigation Anchors](#one-page-navigation-anchors)
+- [Current Sections](#current-sections)
+- [Key Features](#key-features)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Getting Started](#getting-started)
+- [Development Commands](#development-commands)
+- [Deployment](#deployment)
+- [Updating Content](#updating-content)
+- [Contact](#contact)
 
-## 🌟 Features
+## Overview
+The site is built with Next.js App Router, TypeScript, Tailwind CSS, and Framer Motion.
 
-- **Responsive Design:** Fully responsive layout that works seamlessly across all devices
-- **Dark Mode:** System-aware theme switching with smooth transitions
-- **Interactive Timeline:** Visual representation of professional journey
-- **Animated UI:** Smooth animations and transitions using Framer Motion
-- **Dynamic Content:** Easily updateable projects, publications, and experience sections
-- **SEO Optimized:** Built with best practices for search engine optimization
-- **Type Safety:** Full TypeScript support for robust development
-- **Performance Optimized:** Fast page loads and optimized image delivery
+The latest design is a single-page portfolio experience with smooth anchor navigation from the header.
 
-## 🚀 Tech Stack
+## Live Site
+Production URL: `https://ashfakshibli.com/`
 
-- **Framework:** Next.js 13+ with App Router
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS
-- **Animations:** Framer Motion
-- **Icons:** React Icons
-- **Theme:** next-themes
-- **Development:** 
-  - ESLint
-  - PostCSS
-  - Turbopack
+## One-Page Navigation Anchors
+Header navigation and footer quick links point to in-page anchors:
+- Home: `/#home`
+- News: `/#news`
+- About: `/#about`
+- Projects: `/#projects`
+- Publications: `/#publications`
+- Awards: `/#awards`
 
-## 📦 Installation
+## Current Sections
+1. Home (hero, timeline, tech stack)
+2. Latest News
+3. About
+4. Projects
+5. Publications
+6. Awards
 
-1. Clone the repository:
-```bash
-git clone https://github.com/ashfakshibli/portfolio-website.git
-cd portfolio-website
+## Key Features
+- Single-page anchor navigation with active header section tracking
+- Responsive layout across mobile and desktop
+- Dark mode support using `next-themes`
+- Smooth animations and transitions using Framer Motion
+- Render verification script with Playwright screenshots
+
+## Tech Stack
+- Next.js 16 (App Router)
+- React 19
+- TypeScript
+- Tailwind CSS
+- Framer Motion
+- React Icons
+- next-themes
+- ESLint
+
+## Project Structure
+```text
+src/
+  app/
+    page.tsx                # One-page composition and section anchors
+    about/page.tsx          # About section content (standalone + embedded)
+    projects/page.tsx       # Projects section content (standalone + embedded)
+    publications/page.tsx   # Publications section content (standalone + embedded)
+    awards/page.tsx         # Awards section content (standalone + embedded)
+  components/
+    layout/Header.tsx       # Header navigation and active section logic
+    layout/Footer.tsx       # Footer with anchor quick links
+    home/                   # Hero, timeline, latest news, tech stack
+scripts/
+  verify-render.mjs         # Route render checks + screenshots
 ```
 
-2. Install dependencies:
+## Getting Started
+1. Install dependencies:
 ```bash
 npm install
 ```
 
-3. Run the development server:
+2. Start local development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-## 🛠️ Development
-
-### Project Structure
-
-```
-portfolio-website/
-├── src/
-│   ├── app/                 # App router pages
-│   ├── components/          # React components
-│   │   ├── home/           # Homepage components
-│   │   ├── layout/         # Layout components
-│   │   ├── projects/       # Project components
-│   │   └── publications/   # Publication components
-│   ├── types/              # TypeScript types
-│   └── hooks/              # Custom React hooks
-├── public/                  # Static assets
-└── styles/                 # Global styles
+3. Open:
+```text
+http://localhost:3000
 ```
 
-### Key Components
-
-- `HeroSection`: Main landing section with profile and timeline
-- `CompactTimeline`: Interactive professional timeline
-- `Highlights`: Technical expertise showcase
-- `ProjectCard`: Reusable project display component
-- `PublicationCard`: Academic publication component
-
-## 📱 Features Breakdown
-
-### Responsive Design
-- Mobile-first approach
-- Breakpoint-specific layouts
-- Optimized images with Next.js Image component
-
-### Theme Switching
-- System preference detection
-- Smooth transition animations
-- Persistent theme selection
-
-### Interactive Elements
-- Animated section transitions
-- Hover effects
-- Loading states
-
-## 🚀 Deployment
-
-1. Build the production version:
+## Development Commands
 ```bash
+npm run lint
 npm run build
+npm run verify:render
 ```
 
-2. Use the deployment script:
-```bash
-./create-deploy-package.sh
-```
+## Deployment
+Deployment is handled by GitHub Actions using `.github/workflows/deploy.yaml`.
 
-This will create a `personal-website.zip` file ready for deployment.
+Current trigger:
+- Push to `main`
 
-## 🤝 Contributing
+## Updating Content
+Main files to update content quickly:
+- Home and tech stack: `src/components/home/HeroSection.tsx`, `src/components/home/TechnicalLogos.tsx`
+- Latest news: `src/components/home/LatestNews.tsx`
+- About: `src/app/about/page.tsx`
+- Projects: `src/app/projects/page.tsx`
+- Publications: `src/app/publications/page.tsx`
+- Awards: `src/app/awards/page.tsx`
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+## Contact
+Name: Ashfak Md Shibli
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## ✨ Acknowledgments
-
-- Design inspiration from modern portfolio trends
-- Tailwind CSS for utility-first styling
-- Framer Motion for smooth animations
-- Next.js team for an amazing framework
-
-## 📞 Contact
-
-Ashfak Md Shibli - shibli.emon@gmail.com
-
-Project Link: [https://github.com/ashfakshibli/portfolio-website](https://github.com/ashfakshibli/portfolio-website)
+Email: `shibli.emon@gmail.com`
