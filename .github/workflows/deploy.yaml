@@ -108,14 +108,18 @@ jobs:
           chmod 600 ~/.ssh/known_hosts
         fi
 
-        SSH_OPTS="-o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts -o IdentitiesOnly=yes"
+        SSH_OPTS=(
+          -o StrictHostKeyChecking=yes
+          -o "UserKnownHostsFile=$HOME/.ssh/known_hosts"
+          -o IdentitiesOnly=yes
+        )
         
         # Upload file
         echo "Uploading deploy.zip..."
-        scp $SSH_OPTS -P ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key deploy.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ashfrewu/personal-website/
+        scp "${SSH_OPTS[@]}" -P ${{ secrets.SSH_PORT }} -i "$HOME/.ssh/deploy_key" deploy.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ashfrewu/personal-website/
         
         # Execute deployment commands
-        ssh $SSH_OPTS -p ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
+        ssh "${SSH_OPTS[@]}" -p ${{ secrets.SSH_PORT }} -i "$HOME/.ssh/deploy_key" ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
           cd /home/ashfrewu/personal-website || exit 1
           echo "Current directory: $(pwd)"
           
