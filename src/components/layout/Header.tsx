@@ -13,6 +13,7 @@ const navigation = [
   { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },
   { name: 'Publications', href: '/publications' },
+  { name: 'Awards', href: '/awards' },
 ];
 
 const socialLinks = [
