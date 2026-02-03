@@ -18,6 +18,13 @@ const nextConfig = {
 
     return [
       {
+        // Prevent stale HTML/page caches across CDN/browser after deploys.
+        source: "/((?!_next/static|_next/image|favicon.ico).*)",
+        headers: [
+          { key: "Cache-Control", value: "no-store, max-age=0" }
+        ]
+      },
+      {
         source: "/(.*)",
         headers: [
           { key: "Content-Security-Policy", value: csp },
