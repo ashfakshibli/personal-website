@@ -74,15 +74,48 @@ jobs:
         mkdir -p ~/.ssh
         echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
         chmod 600 ~/.ssh/deploy_key
-        echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-        chmod 644 ~/.ssh/known_hosts
+
+        # Build known_hosts for the exact host:port pair
+        touch ~/.ssh/known_hosts
+        chmod 600 ~/.ssh/known_hosts
+        if [ -n "${{ secrets.SSH_KNOWN_HOSTS }}" ]; then
+          printf "%s\n" "${{ secrets.SSH_KNOWN_HOSTS }}" | tr -d '\r' > ~/.ssh/known_hosts
+        fi
+
+        # Ensure host key entry exists for non-default SSH ports too
+          # Use pinned known_hosts content from secret (no scanning needed)
+          printf "%s\n" "${{ secrets.SSH_KNOWN_HOSTS }}" | tr -d '\r' > ~/.ssh/known_hosts
+        fi
+
+        # If a host fingerprint is provided, strictly validate the scanned key against it
+        if [ -n "${{ secrets.SSH_HOST_FINGERPRINT }}" ]; then
+          tmpfile="$(mktemp)"
+          # Scan the host key for the specific host:port
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" > "$tmpfile" 2>/dev/null
+          if ssh-keygen -lf "$tmpfile" | awk '{print $2}' | grep -Fx "${{ secrets.SSH_HOST_FINGERPRINT }}" >/dev/null; then
+            # Fingerprint matches: trust only this scanned key
+            mv "$tmpfile" ~/.ssh/known_hosts
+            chmod 600 ~/.ssh/known_hosts
+          else
+            echo "Scanned host key fingerprint mismatch."
+            ssh-keygen -lf "$tmpfile" || true
+            rm -f "$tmpfile"
+            exit 1
+          fi
+        elif [ -z "${{ secrets.SSH_KNOWN_HOSTS }}" ]; then
+          # No pinned known_hosts or fingerprint: fall back to TOFU but do not append
+          ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" > ~/.ssh/known_hosts 2>/dev/null
+          chmod 600 ~/.ssh/known_hosts
+        fi
+
+        SSH_OPTS="-o StrictHostKeyChecking=yes -o UserKnownHostsFile=~/.ssh/known_hosts -o IdentitiesOnly=yes"
         
         # Upload file
         echo "Uploading deploy.zip..."
-        scp -P ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key deploy.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ashfrewu/personal-website/
+        scp $SSH_OPTS -P ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key deploy.zip ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/home/ashfrewu/personal-website/
         
         # Execute deployment commands
-        ssh -p ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
+        ssh $SSH_OPTS -p ${{ secrets.SSH_PORT }} -i ~/.ssh/deploy_key ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} << 'ENDSSH'
           cd /home/ashfrewu/personal-website || exit 1
           echo "Current directory: $(pwd)"
           
