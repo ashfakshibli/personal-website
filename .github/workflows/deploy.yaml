@@ -140,6 +140,10 @@ jobs:
           chmod 755 .
           chmod 644 .htaccess
           chmod -R 755 .next public
+
+          # Force Passenger to reload app code after deploy
+          mkdir -p tmp
+          touch tmp/restart.txt
           
           echo "Deployment completed. Files in directory:"
           ls -la
