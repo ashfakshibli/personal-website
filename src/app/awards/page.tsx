@@ -69,7 +69,7 @@ const awards: AwardItem[] = [
 
 const stats = [
   { label: 'Total Recognitions', value: '5' },
-  { label: 'Latest Milestone', value: '2025' },
+  { label: 'Latest Milestone', value: '2026' },
   { label: 'Focus Areas', value: 'Research + Industry' }
 ];
 
@@ -77,19 +77,6 @@ export default function AwardsPage() {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-12"
-        >
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white">
-            Awards and Recognition
-          </h1>
-          <p className="mt-3 text-gray-600 dark:text-gray-300 max-w-3xl">
-            A selected record of research, industry, and professional recognitions.
-          </p>
-        </motion.section>
-
         <section className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-12">
           {stats.map((stat, index) => (
             <motion.div
