@@ -36,7 +36,7 @@ const underReviewPublications: Publication[] = [
     venue: 'Manuscript',
     venueShort: 'IterVLM',
     year: 2026,
-    logo: '/images/logos/tntech.png',
+    logo: '/images/logos/ieee.jpg',
     type: 'Under Review',
     description: 'Framework for iterative generator-evaluator analysis and quality tracking in VLM pipelines.',
     tags: ['VLMs', 'Evaluation', 'Multimodal AI', 'Iterative Systems']
