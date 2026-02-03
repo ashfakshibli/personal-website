@@ -30,7 +30,7 @@ jobs:
         # Copy necessary files
         cp -r .next deploy/
         cp -r public deploy/
-        cp package.json package-lock.json next.config.ts tsconfig.json deploy/
+        cp package.json package-lock.json next.config.mjs tsconfig.json deploy/
         
         # Create server.js
         cat << 'EOF' > deploy/server.js
@@ -38,17 +38,17 @@ jobs:
         const { parse } = require('url')
         const next = require('next')
         
-        const dev = process.env.NODE_ENV !== 'production'
-        const app = next({ dev })
+        const app = next({ dev: false })
         const handle = app.getRequestHandler()
+        const port = parseInt(process.env.PORT || '3000', 10)
         
         app.prepare().then(() => {
           createServer((req, res) => {
             const parsedUrl = parse(req.url, true)
             handle(req, res, parsedUrl)
-          }).listen(3000, (err) => {
+          }).listen(port, (err) => {
             if (err) throw err
-            console.log('> Ready on http://localhost:3000')
+            console.log(`> Ready on port ${port}`)
           })
         })
         EOF
@@ -61,6 +61,7 @@ jobs:
         PassengerNodejs "/home/ashfrewu/nodevenv/personal-website/20/bin/node"
         PassengerAppType node
         PassengerStartupFile server.js
+        PassengerEnvVar NODE_ENV production
         # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
         EOF
         

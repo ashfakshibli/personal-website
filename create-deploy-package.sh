@@ -28,7 +28,7 @@ check_directory_structure() {
         "src/app"
         "src/components"
         "package.json"
-        "next.config.ts"
+        "next.config.mjs"
         "tsconfig.json"
     )
 
@@ -55,17 +55,17 @@ const { createServer } = require('http')
 const { parse } = require('url')
 const next = require('next')
 
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev })
+const app = next({ dev: false })
 const handle = app.getRequestHandler()
+const port = parseInt(process.env.PORT || '3000', 10)
 
 app.prepare().then(() => {
   createServer((req, res) => {
     const parsedUrl = parse(req.url, true)
     handle(req, res, parsedUrl)
-  }).listen(3000, (err) => {
+  }).listen(port, (err) => {
     if (err) throw err
-    console.log('> Ready on http://localhost:3000')
+    console.log(`> Ready on port ${port}`)
   })
 })
 EOL
@@ -120,7 +120,7 @@ cp -r .next $TEMP_DIR/
 cp -r public $TEMP_DIR/
 cp package.json $TEMP_DIR/
 cp package-lock.json $TEMP_DIR/
-cp next.config.ts $TEMP_DIR/
+cp next.config.mjs $TEMP_DIR/
 cp tsconfig.json $TEMP_DIR/
 cp server.js $TEMP_DIR/
 
@@ -133,6 +133,7 @@ PassengerBaseURI "/"
 PassengerNodejs "/home/ashfrewu/nodevenv/personal-website/20/bin/node"
 PassengerAppType node
 PassengerStartupFile server.js
+PassengerEnvVar NODE_ENV production
 # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
 EOL
 
@@ -154,7 +155,7 @@ if [ -f "personal-website.zip" ]; then
     print_status "- Next.js application files (src/app, src/components)"
     print_status "- Built files (.next/)"
     print_status "- Public assets (public/)"
-    print_status "- Configuration files (next.config.ts, tsconfig.json)"
+    print_status "- Configuration files (next.config.mjs, tsconfig.json)"
     print_status "- server.js"
     print_status "- .htaccess"
 else
