@@ -83,7 +83,11 @@ jobs:
         fi
 
         # Ensure host key entry exists for non-default SSH ports too
-        ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null
+        if ! ssh-keygen -F "[${{ secrets.SSH_HOST }}]:${{ secrets.SSH_PORT }}" -f ~/.ssh/known_hosts >/dev/null 2>&1; then
+          if ! ssh-keyscan -p "${{ secrets.SSH_PORT }}" -H "${{ secrets.SSH_HOST }}" >> ~/.ssh/known_hosts 2>/dev/null; then
+            echo "Warning: ssh-keyscan failed for ${{ secrets.SSH_HOST }}:${{ secrets.SSH_PORT }}, proceeding with existing known_hosts."
+          fi
+        fi
         sort -u ~/.ssh/known_hosts -o ~/.ssh/known_hosts
 
         # Optional pinning: set SSH_HOST_FINGERPRINT secret to enforce exact server key
