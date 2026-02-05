@@ -14,6 +14,7 @@ import {
   type SimulationNodeDatum
 } from "d3-force";
 import { motion } from "framer-motion";
+import { BrainCircuit, ChartBar, Code, Layers, Wrench } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import { TECH_GROUPS, type TechIcon } from "./techStackData";
@@ -56,6 +57,13 @@ interface GraphPalette {
 const GROUP_COLORS = ["#3b82f6", "#a855f7", "#22c55e", "#f59e0b"];
 const BASE_HEIGHT = 400;
 const MOBILE_BREAKPOINT = 768;
+const ROOT_ICON: TechIcon = Layers;
+const GROUP_ICONS: Record<string, TechIcon> = {
+  Languages: Code,
+  AI: BrainCircuit,
+  "Data, Viz & Cloud": ChartBar,
+  "Tools & Testing": Wrench
+};
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
@@ -170,7 +178,8 @@ export default function TechGraph() {
         label: "Tech Stack",
         kind: "root",
         color: "#38bdf8",
-        radius: 15
+        radius: 15,
+        icon: ROOT_ICON
       }
     ];
 
@@ -187,7 +196,8 @@ export default function TechGraph() {
         label: group.name,
         kind: "group",
         color: GROUP_COLORS[groupIndex % GROUP_COLORS.length],
-        radius: 12
+        radius: 12,
+        icon: GROUP_ICONS[group.name] ?? ROOT_ICON
       };
       nodes.push(groupNode);
       nodeById.set(groupId, groupNode);
@@ -671,22 +681,6 @@ export default function TechGraph() {
     return new Map(renderNodes.map((node) => [node.id, node]));
   }, [renderNodes]);
 
-  const shouldShowLabel = (node: GraphNode) => {
-    if (!isMobile) {
-      return true;
-    }
-
-    if (node.kind !== "tech") {
-      return true;
-    }
-
-    if (!activeNodeIds) {
-      return false;
-    }
-
-    return activeNodeIds.has(node.id);
-  };
-
   const graphWidth = Math.max(viewport.width, 1);
   const graphHeight = Math.max(viewport.height || BASE_HEIGHT, 1);
 
@@ -742,31 +736,20 @@ export default function TechGraph() {
             <g>
               {renderNodes.map((node) => {
                 const isActive = activeNodeIds?.has(node.id) ?? false;
-                const showLabel = shouldShowLabel(node);
-                const fill = getRenderableNodeColor(node, isDark, palette);
+                const showLabel = !isMobile;
                 const IconComponent = node.icon;
-                const showLeafVisual =
-                  node.kind === "tech" &&
-                  (Boolean(node.logo) || Boolean(IconComponent));
                 const nodeX = node.x ?? graphWidth / 2;
                 const isRightSide = nodeX > graphWidth / 2;
-                const textAnchor =
-                  node.kind === "root" ? "middle" : isRightSide ? "end" : "start";
-                const textX =
-                  node.kind === "root"
-                    ? 0
-                    : isRightSide
-                      ? -(node.radius + 6)
-                      : node.radius + 6;
-                const textY = node.kind === "root" ? -(node.radius + 8) : 3;
+                const textAnchor = isRightSide ? "end" : "start";
+                const iconSize = node.kind === "root" ? 22 : node.kind === "group" ? 18 : 14;
+                const iconHalf = iconSize / 2;
+                const textX = isRightSide ? -(iconHalf + 8) : iconHalf + 8;
+                const textY = 4;
                 const fontSize = node.kind === "root" ? 12 : node.kind === "group" ? 11 : 10;
-                const estimatedLabelWidth = Math.max(12, node.label.length * fontSize * 0.56);
-                const iconSize = 13;
-                const labelStartX = textAnchor === "start" ? textX : textX - estimatedLabelWidth;
-                const labelEndX = textAnchor === "start" ? textX + estimatedLabelWidth : textX;
-                const iconX = isRightSide ? labelStartX - iconSize - 4 : labelEndX + 4;
-                const iconY = textY - iconSize + 3;
                 const iconColor = getRenderableNodeColor(node, isDark, palette);
+                const nodeOpacity = getNodeOpacity(node.id, activeNodeIds);
+                const displayLabel = node.kind === "root" ? "Tech Stack" : node.label;
+                const hitRadius = Math.max(node.radius + 6, iconHalf + 6);
 
                 return (
                   <g
@@ -792,13 +775,31 @@ export default function TechGraph() {
                     className="cursor-pointer outline-none"
                   >
                     <circle
-                      r={node.radius}
-                      fill={fill}
-                      fillOpacity={node.kind === "tech" ? 0.9 : 0.95}
-                      stroke={isActive ? palette.rootLabel : palette.nodeStroke}
-                      strokeWidth={isActive ? 2.1 : 1.2}
-                      opacity={getNodeOpacity(node.id, activeNodeIds)}
+                      r={hitRadius}
+                      fill="transparent"
+                      stroke={isActive ? palette.edgeActive : "transparent"}
+                      strokeWidth={isActive ? 2 : 0}
                     />
+                    {node.logo ? (
+                      <image
+                        href={node.logo}
+                        x={-iconHalf}
+                        y={-iconHalf}
+                        width={iconSize}
+                        height={iconSize}
+                        opacity={nodeOpacity}
+                      />
+                    ) : IconComponent ? (
+                      <g transform={`translate(${-iconHalf}, ${-iconHalf})`} opacity={nodeOpacity}>
+                        <IconComponent size={iconSize} style={{ color: iconColor }} />
+                      </g>
+                    ) : (
+                      <circle
+                        r={iconHalf}
+                        fill={iconColor}
+                        opacity={nodeOpacity}
+                      />
+                    )}
                     {showLabel && (
                       <text
                         x={textX}
@@ -818,33 +819,10 @@ export default function TechGraph() {
                         }
                         fontSize={fontSize}
                         fontWeight={node.kind === "tech" ? 500 : 600}
-                        opacity={node.kind === "root" ? 1 : getNodeOpacity(node.id, activeNodeIds)}
+                        opacity={node.kind === "root" ? 1 : nodeOpacity}
                       >
-                        {node.kind === "root" ? "Tech Stack" : node.label}
+                        {displayLabel}
                       </text>
-                    )}
-                    {showLeafVisual && textAnchor !== "middle" && (
-                      node.logo ? (
-                        <image
-                          href={node.logo}
-                          x={iconX}
-                          y={iconY}
-                          width={iconSize}
-                          height={iconSize}
-                          opacity={getNodeOpacity(node.id, activeNodeIds)}
-                        />
-                      ) : IconComponent ? (
-                        <g
-                          transform={`translate(${iconX}, ${iconY})`}
-                          opacity={getNodeOpacity(node.id, activeNodeIds)}
-                        >
-                          <IconComponent
-                            className="w-3.5 h-3.5"
-                            style={{ color: iconColor }}
-                            title={node.label}
-                          />
-                        </g>
-                      ) : null
                     )}
                   </g>
                 );
