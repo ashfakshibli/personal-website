@@ -5,8 +5,11 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import CompactTimeline from './CompactTimeline';
+import TechGraph from './TechGraph';
 import TechnicalLogos from './TechnicalLogos';
 import PDFViewer from '@/components/shared/PDFViewer';
+
+const SHOW_LEGACY_TECH_STACK = false;
 
 export default function HeroSection() {
   const [showResume, setShowResume] = useState(false);
@@ -162,7 +165,10 @@ export default function HeroSection() {
         transition={{ delay: 0.8 }}
         className="w-full max-w-7xl mx-auto px-4 md:px-0 -mt-2"
       >
-        <TechnicalLogos />
+        <div className="space-y-3">
+          <TechGraph />
+          {SHOW_LEGACY_TECH_STACK && <TechnicalLogos />}
+        </div>
       </motion.div>
     </div>
   );
