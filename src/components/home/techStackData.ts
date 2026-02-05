@@ -1,5 +1,19 @@
 import type { CSSProperties, ComponentType } from "react";
 import {
+  AppWindow,
+  Brain,
+  BrainCircuit,
+  Car,
+  ChartBar,
+  ChartLine,
+  Database,
+  DatabaseZap,
+  Network,
+  PencilRuler,
+  Share2,
+  Terminal
+} from "lucide-react";
+import {
   SiPython,
   SiSwift,
   SiDart,
@@ -35,6 +49,7 @@ export type TechIcon = ComponentType<{
   className?: string;
   style?: CSSProperties;
   title?: string;
+  size?: number;
 }>;
 
 export type TechItem = {
@@ -60,9 +75,9 @@ export const TECH_GROUPS: TechGroup[] = [
       { icon: SiSwift, color: "#F05138", name: "Swift" },
       { icon: SiDotnet, color: "#239120", name: "C#" },
       { icon: SiCplusplus, color: "#00599C", name: "C++" },
-      { name: "SQL" },
-      { name: "NoSQL" },
-      { name: "Shell" }
+      { icon: Database, name: "SQL" },
+      { icon: DatabaseZap, name: "NoSQL" },
+      { icon: Terminal, name: "Shell" }
     ]
   },
   {
@@ -71,8 +86,8 @@ export const TECH_GROUPS: TechGroup[] = [
       { icon: SiTensorflow, color: "#FF6F00", name: "TensorFlow" },
       { icon: SiPytorch, color: "#EE4C2C", name: "PyTorch" },
       { icon: SiScikitlearn, color: "#F7931E", name: "sklearn" },
-      { name: "CNN/DNN" },
-      { name: "NLTK" },
+      { icon: BrainCircuit, name: "CNN/DNN" },
+      { icon: Brain, name: "NLTK" },
       { icon: SiGithubcopilot, color: "#000000", name: "Agentic Coding" },
       { icon: SiLangchain, color: "#1C3C3C", name: "Prompt Eng" },
       { icon: SiClaude, color: "#D97757", name: "Claude Code" },
@@ -85,15 +100,15 @@ export const TECH_GROUPS: TechGroup[] = [
     items: [
       { icon: SiPandas, color: "#150458", name: "pandas" },
       { icon: SiNumpy, color: "#013243", name: "NumPy" },
-      { name: "Matplotlib" },
-      { name: "Seaborn" },
+      { icon: ChartLine, name: "Matplotlib" },
+      { icon: ChartBar, name: "Seaborn" },
       { icon: SiPlotly, color: "#3F4F75", name: "Plotly" },
-      { name: "Graphviz" },
+      { icon: Network, name: "Graphviz" },
       { icon: SiD3Dotjs, color: "#F9A03C", name: "D3.js" },
       { icon: SiFirebase, color: "#FFCA28", name: "Firebase" },
       { icon: SiGooglecloud, color: "#4285F4", name: "GCP" },
       { icon: SiMysql, color: "#4479A1", name: "MySQL" },
-      { name: "REST API" }
+      { icon: Share2, name: "REST API" }
     ]
   },
   {
@@ -106,9 +121,9 @@ export const TECH_GROUPS: TechGroup[] = [
       { icon: SiPytest, color: "#0A9EDC", name: "pytest" },
       { icon: SiXcode, color: "#147EFB", name: "Xcode/XCTest" },
       { icon: SiSelenium, color: "#43B02A", name: "Selenium" },
-      { name: "Label Studio" },
-      { name: "Carla" },
-      { name: "VS Code" }
+      { icon: PencilRuler, name: "Label Studio" },
+      { icon: Car, name: "Carla" },
+      { icon: AppWindow, name: "VS Code" }
     ]
   }
 ];
