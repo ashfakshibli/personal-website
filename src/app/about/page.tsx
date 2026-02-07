@@ -3,25 +3,10 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import {
-  FaBrain,
   FaCode,
   FaGraduationCap,
-  FaLock,
-  FaServer,
   FaUsers
 } from 'react-icons/fa';
-import {
-  SiDocker,
-  SiDotnet,
-  SiFirebase,
-  SiGit,
-  SiGooglecloud,
-  SiJavascript,
-  SiMysql,
-  SiPytorch,
-  SiPython,
-  SiSwift
-} from 'react-icons/si';
 
 interface EducationItem {
   logo?: string;
@@ -139,37 +124,6 @@ const researchCollaborations: CollaborationItem[] = [
       'Study of iterative refinement vulnerabilities and quality patterns'
     ]
   }
-];
-
-const technicalSkills = [
-  {
-    icon: FaBrain,
-    name: 'ML and AI Systems',
-    items: ['PyTorch', 'TensorFlow', 'scikit-learn', 'BERT/CNN pipelines']
-  },
-  {
-    icon: FaLock,
-    name: 'Security Research',
-    items: ['SMS Phishing Defense', 'STRIDE Modeling', 'Adversarial Evaluation']
-  },
-  {
-    icon: FaCode,
-    name: 'Data and Visualization',
-    items: ['pandas/NumPy', 'NetworkX', 'Graphviz', 'D3.js']
-  }
-];
-
-const tools = [
-  { icon: SiPython, name: 'Python' },
-  { icon: SiSwift, name: 'Swift' },
-  { icon: SiDotnet, name: 'C#' },
-  { icon: SiJavascript, name: 'JavaScript' },
-  { icon: SiPytorch, name: 'PyTorch' },
-  { icon: SiGooglecloud, name: 'GCP' },
-  { icon: SiFirebase, name: 'Firebase' },
-  { icon: SiDocker, name: 'Docker' },
-  { icon: SiMysql, name: 'MySQL' },
-  { icon: SiGit, name: 'Git' }
 ];
 
 function StandardCard({
@@ -337,54 +291,6 @@ export default function AboutPage({ embedded = false }: { embedded?: boolean }) 
           </div>
         </motion.section>
 
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-16"
-        >
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
-            <FaBrain className="mr-3 text-blue-600 dark:text-blue-400" />
-            Technical Expertise
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {technicalSkills.map((skill) => (
-              <motion.div key={skill.name} whileHover={{ scale: 1.02 }}>
-                <StandardCard>
-                  <div className="flex items-center mb-4">
-                    <skill.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                    <h3 className="ml-3 font-semibold text-gray-900 dark:text-white">{skill.name}</h3>
-                  </div>
-                  <ul className="space-y-2">
-                    {skill.items.map((item) => (
-                      <li key={item} className="text-sm text-gray-600 dark:text-gray-300">
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </StandardCard>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        <motion.section initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
-            <FaServer className="mr-3 text-blue-600 dark:text-blue-400" />
-            Tools and Technologies
-          </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-            {tools.map((tool) => (
-              <motion.div key={tool.name} whileHover={{ scale: 1.05 }}>
-                <StandardCard>
-                  <div className="flex items-center justify-center">
-                    <tool.icon className="w-8 h-8 text-blue-600 dark:text-blue-400" />
-                    <span className="ml-2 text-gray-900 dark:text-white">{tool.name}</span>
-                  </div>
-                </StandardCard>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
       </div>
     </div>
   );
