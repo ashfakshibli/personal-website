@@ -19,7 +19,7 @@ export default function HeroSection() {
       <PDFViewer
         isOpen={showResume}
         onClose={() => setShowResume(false)}
-        fileUrl="/Ashfak_Shibli_CV_January_2026.pdf"
+        fileUrl="/Ashfak_Shibli_Resume.pdf"
       />
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         {/* Profile Section */}
@@ -77,8 +77,8 @@ export default function HeroSection() {
               ))}
             </div>
             
-            {/* CV Buttons */}
-            <div className="flex justify-center space-x-3 mt-5">
+            {/* Resume Button */}
+            <div className="flex justify-center mt-5">
               <motion.button
                 initial={false}
                 animate={{ opacity: 1, y: 0 }}
@@ -110,37 +110,8 @@ export default function HeroSection() {
                     d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
                   />
                 </svg>
-                View CV
+                View Resume
               </motion.button>
-
-              <motion.a
-                href="/Ashfak_Shibli_CV_January_2026.pdf"
-                download
-                initial={false}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.7 }}
-                className="px-3.5 py-1.5 bg-gray-600 hover:bg-gray-700 
-                         text-white text-xs md:text-sm font-medium rounded-full 
-                         shadow-lg hover:shadow-xl 
-                         transform hover:-translate-y-0.5 
-                         transition-all duration-150
-                         flex items-center justify-center gap-1.5"
-              >
-                <svg 
-                  className="w-4 h-4" 
-                  fill="none" 
-                  stroke="currentColor" 
-                  viewBox="0 0 24 24"
-                >
-                  <path 
-                    strokeLinecap="round" 
-                    strokeLinejoin="round" 
-                    strokeWidth={2} 
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
-                Download CV
-              </motion.a>
             </div>
           </motion.div>
         </div>
