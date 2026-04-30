@@ -124,6 +124,21 @@ cp next.config.mjs $TEMP_DIR/
 cp tsconfig.json $TEMP_DIR/
 cp server.js $TEMP_DIR/
 
+# Create public deployment marker
+print_status "Creating deploy marker..."
+DEPLOY_SHA="$(git rev-parse HEAD 2>/dev/null || echo "unknown")"
+DEPLOY_REF="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")"
+DEPLOYED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+cat > $TEMP_DIR/deploy.json << EOL
+{
+  "sha": "$DEPLOY_SHA",
+  "ref": "$DEPLOY_REF",
+  "runId": null,
+  "runAttempt": null,
+  "deployedAt": "$DEPLOYED_AT"
+}
+EOL
+
 # Create production .htaccess file
 print_status "Creating .htaccess file..."
 cat > $TEMP_DIR/.htaccess << 'EOL'
@@ -158,6 +173,7 @@ if [ -f "personal-website.zip" ]; then
     print_status "- Configuration files (next.config.mjs, tsconfig.json)"
     print_status "- server.js"
     print_status "- .htaccess"
+    print_status "- deploy.json"
 else
     print_error "Failed to create deployment package"
     exit 1

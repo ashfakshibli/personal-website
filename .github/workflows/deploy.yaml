@@ -64,6 +64,17 @@ jobs:
         PassengerEnvVar NODE_ENV production
         # DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
         EOF
+
+        # Create a public deployment marker for live-version checks
+        cat > deploy/deploy.json << EOF
+        {
+          "sha": "${{ github.sha }}",
+          "ref": "${{ github.ref_name }}",
+          "runId": "${{ github.run_id }}",
+          "runAttempt": "${{ github.run_attempt }}",
+          "deployedAt": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
+        }
+        EOF
         
         cd deploy
         zip -r ../deploy.zip .
