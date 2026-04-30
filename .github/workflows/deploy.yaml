@@ -66,7 +66,7 @@ jobs:
         EOF
 
         # Create a public deployment marker for live-version checks
-        cat > deploy/deploy.json << EOF
+        cat > deploy/public/deploy.json << EOF
         {
           "sha": "${{ github.sha }}",
           "ref": "${{ github.ref_name }}",

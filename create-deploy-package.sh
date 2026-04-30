@@ -129,7 +129,8 @@ print_status "Creating deploy marker..."
 DEPLOY_SHA="$(git rev-parse HEAD 2>/dev/null || echo "unknown")"
 DEPLOY_REF="$(git rev-parse --abbrev-ref HEAD 2>/dev/null || echo "unknown")"
 DEPLOYED_AT="$(date -u +"%Y-%m-%dT%H:%M:%SZ")"
-cat > $TEMP_DIR/deploy.json << EOL
+mkdir -p $TEMP_DIR/public
+cat > $TEMP_DIR/public/deploy.json << EOL
 {
   "sha": "$DEPLOY_SHA",
   "ref": "$DEPLOY_REF",
