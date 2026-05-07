@@ -23,6 +23,28 @@ interface NewsItem {
 
 const unsortedNewsItems: NewsItem[] = [
   {
+    date: '2026-04-16',
+    content: 'Published "Secure yet fragile: adversarial vulnerabilities of federated vision-language models in medical AI" in Scientific Reports',
+    isHighlight: true,
+    isRecent: true,
+    link: {
+      url: 'https://www.nature.com/articles/s41598-026-48102-4',
+      text: 'View Paper'
+    },
+    conference: 'Scientific Reports'
+  },
+  {
+    date: '2026-04-13',
+    content: 'Released preprint "Short Message Service (SMS) Phishing Attacks and Defenses: A Systematic Review" (to appear in IEEE Access)',
+    isHighlight: true,
+    isRecent: true,
+    link: {
+      url: 'https://arxiv.org/abs/2604.11429',
+      text: 'View Preprint'
+    },
+    conference: 'arXiv preprint / IEEE Access'
+  },
+  {
     date: '2025-12-15',
     content: 'Received Employee of the Year award at Athlete Den',
     isHighlight: true,
@@ -32,17 +54,6 @@ const unsortedNewsItems: NewsItem[] = [
       text: 'View Award'
     },
     location: 'New York, USA'
-  },
-  {
-    date: '2025-12-01',
-    content: 'Submitted SMS Phishing survey paper to IEEE Access (under review)',
-    isHighlight: true,
-    isRecent: true,
-    link: {
-      url: '/publications#under-review',
-      text: 'View Publication'
-    },
-    conference: 'IEEE Access (Under Review)'
   },
   {
     date: '2025-11-10',

@@ -20,17 +20,6 @@ interface Publication {
 
 const underReviewPublications: Publication[] = [
   {
-    title: 'Secure Yet Fragile: Adversarial Vulnerabilities of Federated Vision-Language Models in Medical AI',
-    authors: ['A. M. Shibli', 'A. Imteaj', 'et al.'],
-    venue: 'Nature Scientific Reports',
-    venueShort: 'Nature Sci Reports',
-    year: 2026,
-    logo: '/images/logos/springer.jpg',
-    type: 'Under Review',
-    description: 'Journal manuscript on adversarial vulnerabilities in federated VLM systems for medical AI.',
-    tags: ['AI Security', 'Medical AI', 'VLMs', 'Federated Learning']
-  },
-  {
     title: 'IterVLM: An Iterative Evaluation Framework for Vision-Language Models',
     authors: ['A. M. Shibli', 'et al.'],
     venue: 'Manuscript',
@@ -42,19 +31,49 @@ const underReviewPublications: Publication[] = [
     tags: ['VLMs', 'Evaluation', 'Multimodal AI', 'Iterative Systems']
   },
   {
-    title: 'Short Message Service (SMS) Phishing: Attack Characterization, Defense Landscape, and Future Directions',
-    authors: ['M. M. A. Pritom', 'A. M. Shibli', 'S. M. M. Hossain', 'M. Mia', 'S. M. Sanjari'],
-    venue: 'IEEE Access',
-    venueShort: 'IEEE Access',
-    year: 2025,
+    title: 'Short Message Service (SMS) Phishing Attacks and Defenses: A Systematic Review',
+    authors: [
+      'Mir Mehedi A. Pritom',
+      'Seyed Mohammad Sanjari',
+      'Maraz Mia',
+      'Ashfak Md Shibli',
+      'S. M. Mostaq Hossain',
+      'Muhammad Ismail',
+      'Shouhuai Xu'
+    ],
+    venue: 'arXiv preprint (to appear in IEEE Access)',
+    venueShort: 'arXiv',
+    year: 2026,
     logo: '/images/logos/ieee.jpg',
-    type: 'Under Review',
-    description: 'Comprehensive study of SMS phishing attacks, current defenses, and open research directions.',
-    tags: ['Smishing', 'Cybersecurity', 'Threat Modeling', 'Defense']
+    type: 'Preprint',
+    link: 'https://arxiv.org/abs/2604.11429',
+    description: 'Systematic review of smishing attacks, defenses, datasets, and open research directions, released as an arXiv preprint and targeted for IEEE Access.',
+    tags: ['Smishing', 'Cybersecurity', 'Systematic Review', 'Defense']
   }
 ];
 
 const publishedPublications: Publication[] = [
+  {
+    title: 'Secure yet fragile: adversarial vulnerabilities of federated vision-language models in medical AI',
+    authors: [
+      'Awal Ahmed Fime',
+      'Tasfia Zaman Samiha',
+      'Md Zarif Hossain',
+      'Saika Zaman',
+      'Ashfak Md Shibli',
+      'Abdur R. Shahid',
+      'Zhen Ni',
+      'Ahmed Imteaj'
+    ],
+    venue: 'Scientific Reports',
+    venueShort: 'Sci Rep',
+    year: 2026,
+    logo: '/images/logos/springer.jpg',
+    type: 'Journal',
+    link: 'https://www.nature.com/articles/s41598-026-48102-4',
+    description: 'Journal article evaluating adversarial vulnerabilities and test-time defenses for federated medical vision-language models.',
+    tags: ['AI Security', 'Medical AI', 'VLMs', 'Federated Learning']
+  },
   {
     title: 'SmishViz: Towards A Graph-based Visualization System for Monitoring and Characterizing Ongoing Smishing Threats',
     authors: ['Seyed Mohammad Sanjari', 'Ashfak Md Shibli', 'Maraz Mia', 'Maanak Gupta', 'Mir Mehedi Ahsan Pritom'],
@@ -248,13 +267,13 @@ export default function PublicationsPage({ embedded = false }: { embedded?: bool
           </p>
         </motion.div>
 
-        <section className="mb-10">
+        <section id="under-review" className="mb-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="text-2xl font-bold text-gray-900 dark:text-white mb-6"
           >
-            Under Review
+            Preprints & Under Review
           </motion.h2>
           <div className="space-y-8">
             {underReviewPublications.map((pub, index) => (
@@ -267,7 +286,7 @@ export default function PublicationsPage({ embedded = false }: { embedded?: bool
           </div>
         </section>
 
-        <section>
+        <section id="published">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
