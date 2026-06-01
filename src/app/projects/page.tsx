@@ -4,7 +4,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { SiPython, SiSwift, SiFirebase, SiGooglecloud, SiDotnet, SiSharp, SiPytorch, SiOpencv } from 'react-icons/si';
-import { FaBrain, FaChartLine, FaDatabase, FaMobileAlt, FaServer, FaShieldAlt } from 'react-icons/fa';
+import { FaBrain, FaChartLine, FaDatabase, FaServer, FaShieldAlt } from 'react-icons/fa';
 
 const projects = [
   {
@@ -26,7 +26,7 @@ const projects = [
         ],
         highlights: [
           'Real-time athlete activity detection',
-          'Mobile-optimized ML models',
+          'Production ML model optimization',
           'Cloud infrastructure integration',
           'Patent-pending technology'
         ]
@@ -57,7 +57,7 @@ const projects = [
         technologies: [
           { icon: SiDotnet, name: 'ASP.NET' },
           { icon: SiSharp, name: 'C#' },
-          { icon: FaMobileAlt, name: 'Bluetooth Security Protocols' }
+          { icon: FaShieldAlt, name: 'Bluetooth Security Protocols' }
         ],
         highlights: [
           'Secure firmware updates',

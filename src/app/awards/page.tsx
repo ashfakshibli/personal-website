@@ -31,7 +31,7 @@ const awards: AwardItem[] = [
     period: '2025',
     category: 'Industry',
     description:
-      'Awarded for technical leadership in AI model architecture, mobile optimization, and product commercialization support.',
+      'Awarded for technical leadership in AI model architecture, performance optimization, and product commercialization support.',
     logo: '/images/logos/athleteden.png',
     icon: FaAward
   },
@@ -51,7 +51,7 @@ const awards: AwardItem[] = [
     period: '2021',
     category: 'Professional',
     description:
-      'Recognition for cross-team collaboration and delivery effectiveness on mobile and desktop engineering programs.',
+      'Recognition for cross-team collaboration and delivery effectiveness across application and desktop engineering programs.',
     logo: '/images/logos/samsung.png',
     icon: FaMedal
   },

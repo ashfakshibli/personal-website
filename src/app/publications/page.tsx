@@ -110,8 +110,8 @@ const publishedPublications: Publication[] = [
     logo: '/images/logos/ieee.jpg',
     type: 'Conference',
     link: 'https://ieeexplore.ieee.org/document/10527300',
-    description: 'Research on AI-driven security threats in mobile communications.',
-    tags: ['Security', 'AI', 'Mobile']
+    description: 'Research on AI-driven security threats in messaging communications.',
+    tags: ['Security', 'AI', 'Messaging']
   },
   {
     title: 'Survey on Security Attacks in Connected and Autonomous Vehicular Systems',

@@ -40,7 +40,7 @@ const timelineData: TimelineItem[] = [
   {
     year: '2022',
     role: 'Lead Software Engineer',
-    description: 'Innovation - Mobile Application',
+    description: 'Innovation - Application Development',
     company: 'Samsung R&D',
     logo: '/images/logos/samsung.png',
   }

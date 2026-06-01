@@ -66,7 +66,7 @@ const experienceInfo: ExperienceItem[] = [
     organization: 'Athlete Den',
     role: 'Software Engineer',
     year: 'May 2024 - Current',
-    focus: 'Leading ML pipeline architecture, mobile AI optimization, and analytics infrastructure.',
+    focus: 'Leading ML pipeline architecture, production AI workflows, and analytics infrastructure.',
     tools: ['Python', 'PyTorch', 'Google Cloud', 'Firebase', 'Computer Vision']
   },
   {

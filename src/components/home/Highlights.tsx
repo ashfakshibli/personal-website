@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { 
   FaBrain, 
   FaShieldAlt, 
-  FaMobileAlt, 
+  FaLaptopCode,
   FaDatabase,
   FaCode,
   FaChartLine
@@ -23,9 +23,9 @@ const highlights = [
     description: 'Research in SMS phishing detection and healthcare data protection'
   },
   {
-    icon: FaMobileAlt,
-    title: 'Mobile Development',
-    description: 'iOS app development with ML model integration and cloud services'
+    icon: FaLaptopCode,
+    title: 'Application Development',
+    description: 'Building production applications with ML integration, cloud services, and secure platform architecture'
   },
   {
     icon: FaDatabase,
