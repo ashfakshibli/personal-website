@@ -13,6 +13,8 @@ const SKIP_SERVER = process.env.RENDER_CHECK_SKIP_SERVER === '1';
 const OUT_DIR = path.resolve(process.cwd(), 'artifacts/render-check');
 const LOG_PATH = path.join(OUT_DIR, 'dev-server.log');
 const REPORT_PATH = path.join(OUT_DIR, 'report.json');
+const REMOVED_CV_PATH = '/Ashfak_Shibli_CV_January_2026.pdf';
+const ACTIVE_RESUME_PATH = '/Ashfak_Shibli_Resume.pdf';
 
 const routes = [
   {
@@ -199,6 +201,75 @@ async function verifyRoute(browser, routeConfig) {
   };
 }
 
+async function verifyRemovedCv() {
+  const url = `${BASE_URL}${REMOVED_CV_PATH}`;
+  const [getResponse, headResponse] = await Promise.all([
+    fetch(url, { redirect: 'manual' }),
+    fetch(url, { method: 'HEAD', redirect: 'manual' })
+  ]);
+  const body = await getResponse.text();
+  const expectedRobotsTag = 'noindex, noarchive';
+  const location = getResponse.headers.get('location');
+
+  const pass =
+    getResponse.status === 410 &&
+    headResponse.status === 410 &&
+    getResponse.headers.get('x-robots-tag') === expectedRobotsTag &&
+    headResponse.headers.get('x-robots-tag') === expectedRobotsTag &&
+    location === null &&
+    body.includes('This document has been permanently removed.');
+
+  return {
+    route: REMOVED_CV_PATH,
+    pass,
+    getStatus: getResponse.status,
+    headStatus: headResponse.status,
+    xRobotsTag: getResponse.headers.get('x-robots-tag'),
+    location,
+    body
+  };
+}
+
+async function verifyActiveResume() {
+  const response = await fetch(`${BASE_URL}${ACTIVE_RESUME_PATH}`, {
+    method: 'HEAD',
+    redirect: 'manual'
+  });
+  const contentType = response.headers.get('content-type');
+  const pass = response.status === 200 && contentType?.includes('application/pdf');
+
+  return {
+    route: ACTIVE_RESUME_PATH,
+    pass,
+    status: response.status,
+    contentType
+  };
+}
+
+async function verifyCrawlerFiles() {
+  const [sitemapResponse, robotsResponse] = await Promise.all([
+    fetch(`${BASE_URL}/sitemap.xml`, { redirect: 'manual' }),
+    fetch(`${BASE_URL}/robots.txt`, { redirect: 'manual' })
+  ]);
+  const [sitemap, robots] = await Promise.all([
+    sitemapResponse.text(),
+    robotsResponse.text()
+  ]);
+  const sitemapContainsRemovedCv = sitemap.includes(REMOVED_CV_PATH);
+  const robotsBlocksRemovedCv = robots
+    .split(/\r?\n/)
+    .some((line) => line.trim().toLowerCase() === `disallow: ${REMOVED_CV_PATH.toLowerCase()}`);
+
+  return {
+    route: 'crawler-files',
+    pass: !sitemapContainsRemovedCv && !robotsBlocksRemovedCv,
+    sitemapStatus: sitemapResponse.status,
+    robotsStatus: robotsResponse.status,
+    sitemapContainsRemovedCv,
+    robotsBlocksRemovedCv
+  };
+}
+
 async function main() {
   await ensureDir(OUT_DIR);
 
@@ -220,6 +291,13 @@ async function main() {
         console.log(`  Missing: ${result.requiredMissing.join(', ') || 'none'}`);
         console.log(`  JS errors: ${result.pageErrors.length + result.consoleErrors.length}`);
       }
+    }
+
+    for (const verification of [verifyRemovedCv, verifyActiveResume, verifyCrawlerFiles]) {
+      const result = await verification();
+      results.push(result);
+      const icon = result.pass ? 'PASS' : 'FAIL';
+      console.log(`${icon} ${result.route}`);
     }
 
     const failed = results.filter((r) => !r.pass);

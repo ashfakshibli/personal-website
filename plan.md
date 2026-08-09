@@ -1,11 +1,11 @@
 # Personal Website Update Plan (Scope B)
 
 Date: February 2, 2026
-Primary source of truth: `public/Ashfak_Shibli_CV_January_2026.pdf`
+Status: Historical planning document; résumé asset references here are not authoritative.
 
 ## Guardrails (Confirmed)
 - Work only in dedicated branch: `updates-2026`.
-- Replace current resume file usage with January 2026 CV.
+- Keep the active résumé viewer connected to the current résumé asset.
 - Keep public contact as email/social only (no phone/location exposure).
 - Update About experience with corrected dates/details from CV.
 - Do not update timeline chronology in this pass.
@@ -23,7 +23,7 @@ Primary source of truth: `public/Ashfak_Shibli_CV_January_2026.pdf`
 
 ## Step-by-Step Implementation
 
-1) Finalize update payload from CV
+1) Finalize update payload from verified source material
 - Build a concise content map for:
   - About experience (Athlete Den intern/full-time split + Samsung + TA/RA + collaborations)
   - Personal projects (AI Course Advisor, Generalized Price Tracker)
@@ -31,13 +31,13 @@ Primary source of truth: `public/Ashfak_Shibli_CV_January_2026.pdf`
   - Awards list
 - Keep wording web-readable (short bullets) while preserving factual accuracy.
 
-2) Update home CV actions
+2) Update home résumé actions
 - File: `src/components/home/HeroSection.tsx`
 - Replace both PDF references:
   - `fileUrl` for modal viewer
   - `href` for download link
-- Point both to `/Ashfak_Shibli_CV_January_2026.pdf`.
-- Rename CTA text to `View CV` and `Download CV` for consistency.
+- Point the viewer to `/Ashfak_Shibli_Resume.pdf`.
+- Use `View Resume` for the CTA.
 - Run mandatory validation loop.
 
 3) Update About page content
@@ -97,13 +97,13 @@ Primary source of truth: `public/Ashfak_Shibli_CV_January_2026.pdf`
   - Publications ordering
   - Awards page
 - Run lint/build checks (`npm run lint`, `npm run build`) and resolve issues.
-- Final content check against CV for factual/date consistency.
+- Final content check against verified education and employment records.
 
 9) Git finalize on `updates-2026`
 - Confirm clean result from all validation checkpoints.
 - Stage related files in logical groups.
 - Commit with clear scoped messages, for example:
-  - `feat(home): switch resume actions to january 2026 cv`
+  - `feat(home): update resume actions`
   - `feat(about): refresh experience and add research collaborations`
   - `feat(projects): add personal projects section`
   - `feat(publications): add under-review subsection`
@@ -118,7 +118,7 @@ Primary source of truth: `public/Ashfak_Shibli_CV_January_2026.pdf`
 - Verified branch workflow and commit/push process on `updates-2026`.
 
 ## Acceptance Criteria
-- CV download/view points to `Ashfak_Shibli_CV_January_2026.pdf` everywhere used.
+- Résumé viewing points to `Ashfak_Shibli_Resume.pdf` everywhere used.
 - About reflects corrected experience chronology and includes collaborations.
 - Publications page shows Under Review section above published works.
 - Projects page includes Personal Projects.
