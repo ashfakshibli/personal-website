@@ -4,8 +4,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import {
   FaCode,
-  FaGraduationCap,
-  FaUsers
+  FaGraduationCap
 } from 'react-icons/fa';
 
 interface EducationItem {
@@ -13,7 +12,7 @@ interface EducationItem {
   school: string;
   degree: string;
   year: string;
-  gpa: string;
+  gpa?: string;
   focus: string;
 }
 
@@ -26,29 +25,21 @@ interface ExperienceItem {
   tools: string[];
 }
 
-interface CollaborationItem {
-  institution: string;
-  period: string;
-  focus: string;
-  highlights: string[];
-}
-
 const educationInfo: EducationItem[] = [
   {
     logo: '/images/logos/tntech.png',
     school: 'Tennessee Technological University',
-    degree: 'MS in Computer Science',
-    year: 'Aug 2023 - Aug 2024',
+    degree: 'M.S. in Computer Science',
+    year: 'Aug 2023 – Jul 2024',
     gpa: '4.00/4.00',
-    focus: 'AI and cybersecurity research within the joint MS program.'
+    focus: 'Graduate research in AI and cybersecurity. Degree conferred July 26, 2024.'
   },
   {
     logo: '/images/logos/njit.png',
     school: 'New Jersey Institute of Technology',
-    degree: 'MS in Computer Science',
-    year: 'Sep 2022 - May 2023',
-    gpa: '4.00/4.00',
-    focus: 'Healthcare security, static analysis, and TA/RA foundations'
+    degree: 'Graduate Studies in Computer Science',
+    year: 'Sep 2022 – Aug 2023',
+    focus: 'Graduate study and research in healthcare security, static analysis, and threat modeling before transferring to Tennessee Tech.'
   },
   {
     logo: '/images/logos/CUET_logo.png',
@@ -95,34 +86,11 @@ const experienceInfo: ExperienceItem[] = [
   },
   {
     logo: '/images/logos/samsung.png',
-    organization: 'Samsung Research',
-    role: 'Lead Software Engineer',
-    year: 'Jul 2018 - Aug 2022',
+    organization: 'Samsung R&D Institute Bangladesh',
+    role: 'Software Engineer → Senior Software Engineer → Lead Software Engineer',
+    year: 'Jul 2018 – Aug 2022',
     focus: 'Delivered secure cloud-connected products and automated testing systems.',
     tools: ['Swift', 'C#', 'REST APIs', 'NoSQL', 'WinAppDriver']
-  }
-];
-
-const researchCollaborations: CollaborationItem[] = [
-  {
-    institution: 'Speed Lab, Florida Atlantic University',
-    period: 'Jul 2024 - Current',
-    focus: 'Industry research collaborator for adversarial security analysis on multimodal models.',
-    highlights: [
-      'Adversarial attack experiments on LLM/VLM workflows',
-      'Prompt-engineering based threat-generation analysis',
-      'Dataset curation for automated vehicle security scenarios'
-    ]
-  },
-  {
-    institution: 'University of Tennessee Chattanooga',
-    period: 'Jul 2024 - Current',
-    focus: 'Collaboration on iterative evaluation frameworks for vision-language model research.',
-    highlights: [
-      'Generator-evaluator loop analysis for multimodal systems',
-      'Document-understanding evaluation strategy design',
-      'Study of iterative refinement vulnerabilities and quality patterns'
-    ]
   }
 ];
 
@@ -193,12 +161,14 @@ export default function AboutPage({ embedded = false }: { embedded?: boolean }) 
                       </h3>
                       <p className="text-sm text-blue-600 dark:text-blue-400">{edu.degree}</p>
                       <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">{edu.year}</p>
-                      <span
-                        className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mt-2
-                                 bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
-                      >
-                        GPA: {edu.gpa}
-                      </span>
+                      {edu.gpa && (
+                        <span
+                          className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium mt-2
+                                   bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-200"
+                        >
+                          GPA: {edu.gpa}
+                        </span>
+                      )}
                     </div>
                   </div>
                   <p className="text-sm text-gray-500 dark:text-gray-400 mt-4">{edu.focus}</p>
@@ -255,36 +225,6 @@ export default function AboutPage({ embedded = false }: { embedded?: boolean }) 
                       </span>
                     ))}
                   </div>
-                </StandardCard>
-              </motion.div>
-            ))}
-          </div>
-        </motion.section>
-
-        <motion.section
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mb-16"
-        >
-          <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-8 flex items-center">
-            <FaUsers className="mr-3 text-blue-600 dark:text-blue-400" />
-            Research Collaborations
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {researchCollaborations.map((collab) => (
-              <motion.div key={collab.institution} whileHover={{ scale: 1.02 }}>
-                <StandardCard>
-                  <h3 className="font-semibold text-gray-900 dark:text-white">{collab.institution}</h3>
-                  <p className="text-sm text-blue-600 dark:text-blue-400 mt-1">{collab.period}</p>
-                  <p className="text-sm text-gray-600 dark:text-gray-300 mt-3">{collab.focus}</p>
-                  <ul className="mt-4 space-y-2">
-                    {collab.highlights.map((highlight) => (
-                      <li key={highlight} className="text-sm text-gray-600 dark:text-gray-300 flex items-start">
-                        <span className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2 mt-2" />
-                        <span>{highlight}</span>
-                      </li>
-                    ))}
-                  </ul>
                 </StandardCard>
               </motion.div>
             ))}

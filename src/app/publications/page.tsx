@@ -41,13 +41,12 @@ const underReviewPublications: Publication[] = [
       'Muhammad Ismail',
       'Shouhuai Xu'
     ],
-    venue: 'arXiv preprint (to appear in IEEE Access)',
+    venue: 'arXiv preprint',
     venueShort: 'arXiv',
     year: 2026,
-    logo: '/images/logos/ieee.jpg',
     type: 'Preprint',
     link: 'https://arxiv.org/abs/2604.11429',
-    description: 'Systematic review of smishing attacks, defenses, datasets, and open research directions, released as an arXiv preprint and targeted for IEEE Access.',
+    description: 'Systematic review of smishing attacks, defenses, datasets, and open research directions.',
     tags: ['Smishing', 'Cybersecurity', 'Systematic Review', 'Defense']
   }
 ];
@@ -135,7 +134,7 @@ const publishedPublications: Publication[] = [
     logo: '/images/logos/springer.jpg',
     type: 'Book Chapter',
     link: 'https://doi.org/10.1007/978-981-13-1951-8_71',
-    description: 'Computer vision system for real-time driver monitoring.',
+    description: 'Presented at IEMIS 2018 and received Best Paper recognition; published in the Springer proceedings volume in 2019.',
     tags: ['Computer Vision', 'AI', 'Safety']
   }
 ];

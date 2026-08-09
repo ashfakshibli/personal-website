@@ -35,14 +35,14 @@ const unsortedNewsItems: NewsItem[] = [
   },
   {
     date: '2026-04-13',
-    content: 'Released preprint "Short Message Service (SMS) Phishing Attacks and Defenses: A Systematic Review" (to appear in IEEE Access)',
+    content: 'Released the arXiv preprint “Short Message Service (SMS) Phishing Attacks and Defenses: A Systematic Review”',
     isHighlight: true,
     isRecent: true,
     link: {
       url: 'https://arxiv.org/abs/2604.11429',
       text: 'View Preprint'
     },
-    conference: 'arXiv preprint / IEEE Access'
+    conference: 'arXiv preprint'
   },
   {
     date: '2025-12-15',
@@ -85,7 +85,7 @@ const unsortedNewsItems: NewsItem[] = [
     conference: 'ACM CODASPY 2025'
   },
   {
-    date: '2025-02-15',
+    date: '2025-02-22',
     content: 'Led STEM education outreach at University of Tennessee Chattanooga Open House',
     isHighlight: true,
     isRecent: true,
@@ -103,8 +103,8 @@ const unsortedNewsItems: NewsItem[] = [
     conference: '45th IEEE Symposium on Security and Privacy (IEEE S&P)'
   },
   {
-    date: '2024-05-14',
-    content: 'Started as Full Time Software Engineer at Athlete Den LLC',
+    date: '2024-05-15',
+    content: 'Started as a Full-Time Software Engineer at Athlete Den LLC',
     isHighlight: true,
     link: {
       url: '/projects#athlete-den',
@@ -133,11 +133,11 @@ const unsortedNewsItems: NewsItem[] = [
     }
   },
   {
-    date: '2024-03-31',
-    content: 'Successfully defended MS Thesis on Cybersecurity and AI',
-    subtitle: 'Smishing (SMS Phishing) Attacks and Defenses: Current Concerns, Campaign Infrastructures, and Towards A Scoring-based Defense System',
+    date: '2024-05-07',
+    content: 'Successfully defended M.S. thesis on cybersecurity and AI',
+    subtitle: '“Smishing (SMS Phishing) Attacks and Defenses: Current Concerns, Campaign Infrastructures, and Towards a Scoring-Based Defense System”',
     isHighlight: true,
-    location: 'Tennessee Tech University, TN, USA'
+    location: 'Tennessee Technological University'
   },
   {
     date: '2024-02-10',
@@ -181,7 +181,7 @@ export default function LatestNews() {
 
       <div className="relative w-full max-w-6xl mx-auto">
         {/* Timeline line */}
-        <div className="absolute left-[116px] top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700" />
+        <div className="absolute left-[78px] sm:left-[116px] top-0 bottom-0 w-0.5 bg-gray-200 dark:bg-gray-700" />
 
         <div className="space-y-6">
           {[...unsortedNewsItems]
@@ -193,16 +193,16 @@ export default function LatestNews() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="group relative flex"
+              className="group relative flex min-w-0"
             >
               {/* Date column */}
-              <div className="flex-none w-[120px] text-xs whitespace-nowrap text-gray-500 dark:text-gray-400 text-right pr-4 self-center">
+              <div className="flex-none w-[74px] sm:w-[120px] text-xs whitespace-nowrap text-gray-500 dark:text-gray-400 text-right pr-2 sm:pr-4 self-center">
                 {formatDate(item.date)}
               </div>
 
               {/* Timeline dot */}
               <div className={`
-                absolute left-[109px] top-1/2 -translate-y-1/2 z-10
+                absolute left-[71px] sm:left-[109px] top-1/2 -translate-y-1/2 z-10
                 w-4 h-4 rounded-full border-2 border-white dark:border-gray-800
                 ${item.isHighlight
                   ? 'bg-blue-500 dark:bg-blue-400'
@@ -220,15 +220,15 @@ export default function LatestNews() {
                     }
                   }}
                 className={`
-                  flex-grow ml-8 p-4 rounded-lg transition-all duration-300
+                  flex-grow min-w-0 ml-4 sm:ml-8 p-3 sm:p-4 rounded-lg transition-all duration-300
                   ${item.isHighlight
                     ? 'bg-blue-50 dark:bg-blue-900/30'
                     : 'bg-white dark:bg-gray-800 group-hover:bg-gray-50 dark:group-hover:bg-gray-700'}
                   ${(item.link || (item.links && item.links.length === 1)) ? 'cursor-pointer hover:shadow-md' : ''}
               `}>
-                <div className="flex justify-between items-start gap-4">
-                  <div className="flex-grow">
-                    <div className="flex items-start justify-between gap-4">
+                <div className="flex justify-between items-start gap-4 min-w-0">
+                  <div className="flex-grow min-w-0">
+                    <div className="flex flex-col sm:flex-row items-start justify-between gap-2 sm:gap-4">
                       <p className={`
                         font-medium
                         ${item.isHighlight

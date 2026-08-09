@@ -18,7 +18,7 @@ const timelineData: TimelineItem[] = [
   {
     year: '2023',
     mainContent: {
-      role: 'MS Computer Science',
+      role: 'Computer Science',
       description: 'Artificial Intelligence and Cybersecurity',
       institutions: [
         {
@@ -39,9 +39,9 @@ const timelineData: TimelineItem[] = [
   },
   {
     year: '2022',
-    role: 'Lead Software Engineer',
+    role: 'Software Engineer → Senior Software Engineer → Lead Software Engineer',
     description: 'Innovation - Application Development',
-    company: 'Samsung R&D',
+    company: 'Samsung R&D Institute Bangladesh',
     logo: '/images/logos/samsung.png',
   }
 ];

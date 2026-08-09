@@ -61,7 +61,7 @@ const awards: AwardItem[] = [
     period: 'Feb 2018',
     category: 'Research',
     description:
-      'Best paper recognition for early vision-based driving assistance research work and conference presentation impact.',
+      'Presented at IEMIS 2018 and received Best Paper recognition; published in the Springer proceedings volume in 2019.',
     logo: '/images/logos/springer.jpg',
     icon: FaTrophy
   }

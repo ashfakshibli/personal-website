@@ -17,11 +17,11 @@ const REPORT_PATH = path.join(OUT_DIR, 'report.json');
 const routes = [
   {
     path: '/',
-    requiredTexts: ['Researcher & Software Engineer', 'Latest News', 'View CV']
+    requiredTexts: ['Researcher & Software Engineer', 'Latest News', 'View Resume']
   },
   {
     path: '/about',
-    requiredTexts: ['Education', 'Experience', 'Research Collaborations']
+    requiredTexts: ['Education', 'Experience']
   },
   {
     path: '/projects',

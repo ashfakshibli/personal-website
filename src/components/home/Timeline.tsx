@@ -6,20 +6,20 @@ import { motion } from 'framer-motion';
 const timelineEntries = [
   {
     id: 1,
-    period: '2023 - 2024',
-    role: 'Master of Science in Computer Science',
-    organization: 'Tennessee Tech University',
+    period: 'Aug 2023 – Jul 2024',
+    role: 'M.S. in Computer Science',
+    organization: 'Tennessee Technological University',
     logo: '/images/logos/tntech.png',
-    description: 'Research focused on SMS phishing detection using ML and AI',
+    description: 'Graduate research in AI and cybersecurity. Degree conferred July 26, 2024.',
     delay: 0.2
   },
   {
     id: 2,
-    period: '2022 - 2023',
-    role: 'Master of Science in Computer Science',
+    period: 'Sep 2022 – Aug 2023',
+    role: 'Graduate Studies in Computer Science',
     organization: 'New Jersey Institute of Technology',
     logo: '/images/logos/njit.png',
-    description: 'Research in healthcare security and PHI protection',
+    description: 'Graduate study and research in healthcare security, static analysis, and threat modeling before transferring to Tennessee Tech.',
     delay: 0.4
   },
   {
@@ -34,8 +34,8 @@ const timelineEntries = [
   {
     id: 4,
     period: '2018 - 2022',
-    role: 'Lead Software Engineer',
-    organization: 'Samsung R&D Institute',
+    role: 'Software Engineer → Senior Software Engineer → Lead Software Engineer',
+    organization: 'Samsung R&D Institute Bangladesh',
     logo: '/images/logos/samsung.png',
     description: 'Led development of major applications and innovation initiatives',
     delay: 0.8
