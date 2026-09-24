@@ -11,8 +11,8 @@ import ScrollIndicator from '@/components/shared/ScrollIndicator';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Ashfak Md Shibli - Software Engineer & Researcher',
-  description: 'Professional portfolio of Ashfak Md Shibli - Software Engineer and Computer Science Researcher',
+  title: 'Ashfak Md Shibli - Ph.D. Student at Kennesaw State University',
+  description: 'Ashfak Md Shibli is a Ph.D. student in Computer Science at Kennesaw State University, researcher, and software engineer.',
 };
 
 export default function RootLayout({

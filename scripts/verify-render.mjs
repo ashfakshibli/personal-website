@@ -19,7 +19,7 @@ const ACTIVE_RESUME_PATH = '/Ashfak_Shibli_Resume.pdf';
 const routes = [
   {
     path: '/',
-    requiredTexts: ['Researcher & Software Engineer', 'Latest News', 'View Resume']
+    requiredTexts: ['Ph.D. Student in Computer Science', 'Kennesaw State University', 'Fall 2026', 'Latest News', 'View Resume']
   },
   {
     path: '/about',

@@ -50,12 +50,16 @@ export default function HeroSection() {
             className="text-center w-full space-y-3"
           >
             <h1 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white">
-              Researcher & Software Engineer
+              Ph.D. Student in Computer Science
             </h1>
             <h2 className="text-lg md:text-xl font-semibold text-gray-900 dark:text-white">
-              MS, Computer Science
+              Kennesaw State University
             </h2>
             
+            <p className="text-sm text-gray-600 dark:text-gray-300">
+              Researcher &amp; Software Engineer
+            </p>
+
             {/* Skills Tags */}
             <div className="flex justify-center items-center gap-2 my-4">
               {['AI/ML', 'Cybersecurity', 'Application Dev'].map((skill, index) => (

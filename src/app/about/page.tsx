@@ -27,6 +27,12 @@ interface ExperienceItem {
 
 const educationInfo: EducationItem[] = [
   {
+    school: 'Kennesaw State University',
+    degree: 'Ph.D. in Computer Science',
+    year: 'Fall 2026 – Present',
+    focus: ''
+  },
+  {
     logo: '/images/logos/tntech.png',
     school: 'Tennessee Technological University',
     degree: 'M.S. in Computer Science',
@@ -52,6 +58,13 @@ const educationInfo: EducationItem[] = [
 ];
 
 const experienceInfo: ExperienceItem[] = [
+  {
+    organization: 'Kennesaw State University',
+    role: 'Graduate Research Assistant',
+    year: 'Fall 2026 – Present',
+    focus: 'Working with Dr. Md Shazibul Islam Shamim.',
+    tools: []
+  },
   {
     logo: '/images/logos/athleteden.png',
     organization: 'Athlete Den',

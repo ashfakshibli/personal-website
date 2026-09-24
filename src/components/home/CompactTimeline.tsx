@@ -4,6 +4,7 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
+import { FaGraduationCap } from 'react-icons/fa';
 import { useTheme } from 'next-themes';
 import type { TimelineItem, TimelineItemProps } from '@/types/timeline';
 
@@ -52,6 +53,14 @@ export default function CompactTimeline() {
 
   return (
     <div className="relative w-full">
+      <div className="flex items-center gap-4 rounded-lg border border-blue-100 dark:border-blue-900 bg-white dark:bg-gray-800 p-4 mb-4">
+        <FaGraduationCap className="w-9 h-9 shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
+        <div>
+          <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Fall 2026 – Present</div>
+          <div className="font-semibold text-gray-900 dark:text-white">Ph.D. in Computer Science</div>
+          <div className="text-sm text-gray-600 dark:text-gray-300">Kennesaw State University</div>
+        </div>
+      </div>
       <div className="hidden lg:block relative h-[500px]">
         <svg className="absolute w-full h-full" style={{ zIndex: 0 }}>
           <path

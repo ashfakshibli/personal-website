@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 
 interface NewsItem {
   date: string; // YYYY-MM-DD
+  displayDate?: string;
   content: string;
   isHighlight?: boolean;
   isRecent?: boolean;
@@ -22,6 +23,13 @@ interface NewsItem {
 }
 
 const unsortedNewsItems: NewsItem[] = [
+  {
+    date: '2026-08-01', // Sort key; only the confirmed term is displayed.
+    displayDate: 'Fall 2026',
+    content: 'Started my Ph.D. in Computer Science at Kennesaw State University.',
+    isHighlight: true,
+    isRecent: true
+  },
   {
     date: '2026-04-16',
     content: 'Published "Secure yet fragile: adversarial vulnerabilities of federated vision-language models in medical AI" in Scientific Reports',
@@ -197,7 +205,7 @@ export default function LatestNews() {
             >
               {/* Date column */}
               <div className="flex-none w-[74px] sm:w-[120px] text-xs whitespace-nowrap text-gray-500 dark:text-gray-400 text-right pr-2 sm:pr-4 self-center">
-                {formatDate(item.date)}
+                {item.displayDate ?? formatDate(item.date)}
               </div>
 
               {/* Timeline dot */}
