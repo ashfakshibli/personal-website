@@ -4,11 +4,17 @@
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import React from 'react';
-import { FaGraduationCap } from 'react-icons/fa';
 import { useTheme } from 'next-themes';
 import type { TimelineItem, TimelineItemProps } from '@/types/timeline';
 
 const timelineData: TimelineItem[] = [
+  {
+    year: 'Fall 2026 – Present',
+    role: 'Ph.D. in Computer Science',
+    description: '',
+    company: 'Kennesaw State University',
+    logo: '/images/logos/ksu.png',
+  },
   {
     year: '2024',
     role: 'Software Engineer',
@@ -53,18 +59,10 @@ export default function CompactTimeline() {
 
   return (
     <div className="relative w-full">
-      <div className="flex items-center gap-4 rounded-lg border border-blue-100 dark:border-blue-900 bg-white dark:bg-gray-800 p-4 mb-4">
-        <FaGraduationCap className="w-9 h-9 shrink-0 text-blue-600 dark:text-blue-400" aria-hidden="true" />
-        <div>
-          <div className="text-sm font-medium text-blue-600 dark:text-blue-400">Fall 2026 – Present</div>
-          <div className="font-semibold text-gray-900 dark:text-white">Ph.D. in Computer Science</div>
-          <div className="text-sm text-gray-600 dark:text-gray-300">Kennesaw State University</div>
-        </div>
-      </div>
       <div className="hidden lg:block relative h-[500px]">
-        <svg className="absolute w-full h-full" style={{ zIndex: 0 }}>
+        <svg className="absolute w-full h-full" viewBox="0 0 800 500" preserveAspectRatio="none" aria-hidden="true" style={{ zIndex: 0 }}>
           <path
-            d="M 10 120 Q 250 50, 400 150 T 800 100"
+            d="M 100 85 Q 200 85, 300 155 T 500 155 T 700 85"
             fill="none"
             stroke={strokeColor}
             strokeWidth="2"
@@ -86,68 +84,22 @@ export default function CompactTimeline() {
 }
 
 const TimelineItemDesktop: React.FC<TimelineItemProps> = ({ item, index }) => {
-  const defaultImagePath = '/api/placeholder/400/400';
   const positions = [
-    { x: '0%', y: '17%' },
-    { x: '30%', y: '25%' },
-    { x: '62%', y: '0%' }
+    { x: '0%', y: '2%' },
+    { x: '25%', y: '16%' },
+    { x: '50%', y: '16%' },
+    { x: '75%', y: '2%' }
   ];
-
-  // Special case for the third item - reversed content
-  if (index === 2) {
-    return (
-      <motion.div
-        initial={false}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.2 }}
-        className="absolute"
-        style={{
-          left: positions[index].x,
-          top: positions[index].y,
-          transform: 'translate(-50%, -50%)'
-        }}
-      >
-        <div className="text-center flex flex-col items-center">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            className="relative w-20 h-20 md:w-24 md:h-24 mx-auto mb-2 
-                     bg-white dark:bg-white rounded-full 
-                     shadow-lg dark:shadow-gray-700 p-3"
-          >
-            <Image
-              src={item.logo || defaultImagePath}
-              alt={item.role || 'Company logo'}
-              fill
-              className="object-contain p-2"
-            />
-          </motion.div>
-          <div className="text-sm md:text-base font-medium text-gray-900 dark:text-white">
-            {item.role}
-          </div>
-          <div className="text-xs md:text-sm text-gray-600 dark:text-gray-300">
-            {item.company}
-          </div>
-          <div className="text-xs text-gray-500 dark:text-gray-400">
-            {item.description}
-          </div>
-          <div className="text-sm font-medium text-blue-600 dark:text-blue-400 mt-2">
-            {item.year}
-          </div>
-        </div>
-      </motion.div>
-    );
-  }
 
   return (
     <motion.div
       initial={false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.2 }}
-      className="absolute"
+      className="absolute w-1/4 px-2"
       style={{
         left: positions[index].x,
-        top: positions[index].y,
-        transform: 'translate(-50%, -50%)'
+        top: positions[index].y
       }}
     >
       <TimelineContent item={item} />
@@ -180,12 +132,12 @@ const TimelineContent: React.FC<{ item: TimelineItem }> = ({ item }) => {
 
       {'mainContent' in item && item.mainContent ? (
         <div>
-          <div className="flex justify-center space-x-4 mb-2">
+          <div className="flex justify-center gap-2 mb-2">
             {item.mainContent.institutions.map((institution) => (
               <motion.div
                 key={institution.name}
                 whileHover={{ scale: 1.1 }}
-                className="relative w-16 h-16 md:w-20 md:h-20 
+                className="relative w-14 h-14 xl:w-16 xl:h-16
                          bg-white dark:bg-white rounded-full 
                          shadow-lg dark:shadow-gray-700 p-3"
               >
@@ -244,7 +196,7 @@ const TimelineContent: React.FC<{ item: TimelineItem }> = ({ item }) => {
           >
             <Image
               src={item.logo || defaultImagePath}
-              alt={item.role || 'Timeline item'}
+              alt={item.company || item.role || 'Timeline item'}
               fill
               className="object-contain p-2"
             />
