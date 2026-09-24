@@ -9,21 +9,21 @@ import type { TimelineItem, TimelineItemProps } from '@/types/timeline';
 
 const timelineData: TimelineItem[] = [
   {
-    year: 'Fall 2026 – Present',
+    year: 'Aug 2026 – Present',
     role: 'Ph.D. in Computer Science',
     description: '',
     company: 'Kennesaw State University',
     logo: '/images/logos/ksu.png',
   },
   {
-    year: '2024',
+    year: 'May 2024 – Present',
     role: 'Software Engineer',
     description: 'Building AI Sports Analytics',
     company: 'Athlete Den LLC',
     logo: '/images/logos/athleteden.png',
   },
   {
-    year: '2023',
+    year: 'Sep 2022 – Jul 2024',
     mainContent: {
       role: 'Computer Science',
       description: 'Artificial Intelligence and Cybersecurity',
@@ -45,7 +45,7 @@ const timelineData: TimelineItem[] = [
     }
   },
   {
-    year: '2022',
+    year: 'Jul 2018 – Aug 2022',
     role: 'Software Engineer → Senior Software Engineer → Lead Software Engineer',
     description: 'Innovation - Application Development',
     company: 'Samsung R&D Institute Bangladesh',
