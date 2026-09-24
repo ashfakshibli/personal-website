@@ -14,7 +14,7 @@ const projects = [
         title: 'AI Sports Analysis Platform',
         logo: '/images/logos/athleteden_short.png',
         company: 'Athlete Den LLC',
-        period: 'May 2024 - Current (Intern: May 2023 - Aug 2023)',
+        period: 'May 2024 – Aug 2026 (Intern: May 2023 – Aug 2023)',
         description: 'Patent-pending AI-powered sports analytics platform',
         technologies: [
           { icon: SiSwift, name: 'Swift' },

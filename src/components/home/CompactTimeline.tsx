@@ -16,9 +16,9 @@ const timelineData: TimelineItem[] = [
     logo: '/images/logos/ksu.png',
   },
   {
-    year: 'May 2024 – Present',
+    year: 'May 2024 – Aug 2026',
     role: 'Software Engineer',
-    description: 'Building AI Sports Analytics',
+    description: 'Built AI Sports Analytics',
     company: 'Athlete Den LLC',
     logo: '/images/logos/athleteden.png',
   },

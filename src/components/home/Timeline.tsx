@@ -24,11 +24,11 @@ const timelineEntries = [
   },
   {
     id: 3,
-    period: '2023 - Present',
+    period: 'May 2024 – Aug 2026',
     role: 'Software Engineer',
     organization: 'AthleteDen',
     logo: '/images/logos/athleteden.png',
-    description: 'Leading AI-driven sports technology development',
+    description: 'Led AI-driven sports technology development',
     delay: 0.6
   },
   {
